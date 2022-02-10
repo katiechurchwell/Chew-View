@@ -32,6 +32,17 @@ body {
 }
 
 /* HEADER STYLES */
+#check-us-out {
+  margin: 5px;
+}
+
+#check-us-out a {
+  color: black;
+  font-size: 9px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
 #header {
   display: flex;
   align-items: center;
@@ -79,8 +90,10 @@ body {
   padding-top: 10px;
 }
 
-.zip-select {
+#zip {
   text-align: center;
+  background: var(--beige);
+  border-radius: var(--border-radius);
 }
 
 #zip-list {
@@ -90,8 +103,10 @@ body {
 /* SECTION TITLE STYLES */
 .section-header {
   color: var(--beige);
+  font-family: var(--main-text);
   font-size: 20px;
   text-align: center;
+  text-transform: uppercase;
 }
 
 /* SEARCH PLACEHOLDER TEXT STYLES */
@@ -109,11 +124,36 @@ body {
   padding-top: 7px;
 }
 
-#restaurant {
-  background: var(--beige);
+#restaurant-results-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
 }
 
-/* BUTTONS */
+#restaurant {
+  background: var(--beige);
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+#results-container .card {
+  display: flex;
+}
+
+.restaurant-btn {
+  border: 0;
+  padding: 5px;
+  margin: 5px;
+  width: 200px;
+}
+
+#restaurant-list {
+  display: flex;
+}
+
+/* BUTTONS AND INPUTS */
 .btn {
   background-color: transparent;
   border-radius: var(--border-radius);
