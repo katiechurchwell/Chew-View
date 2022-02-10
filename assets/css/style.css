@@ -72,6 +72,21 @@ body {
   justify-content: center;
 }
 
+#zip-search-container {
+  display: flex;
+  align-items: center;
+  flex-flow: column;
+  padding-top: 10px;
+}
+
+.zip-select {
+  text-align: center;
+}
+
+#zip-list {
+  margin: 0;
+}
+
 /* SECTION TITLE STYLES */
 .section-header {
   color: var(--beige);
@@ -92,6 +107,10 @@ body {
   width: max-content !important;
   height: auto;
   padding-top: 7px;
+}
+
+#restaurant {
+  background: var(--beige);
 }
 
 /* BUTTONS */

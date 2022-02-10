@@ -1,3 +1,11 @@
+//ON ANY BUTTON CLICK, UNHIDE RESULTS
+var resultsContainer = document.querySelector("#results-container");
+document.querySelectorAll(".btn").forEach(button => {
+  button.addEventListener("click", event => {
+    resultsContainer.classList.remove("hide");
+  })
+})
+
 // CHECKS LOCAL STORAGE FOR ZIP CODE SEARCH HISTORY & AUTO-POPULATES ALL EXISTING ZIP CODES AS BUTTONS
 var zipSearchContainerEl = document.querySelector("#zip-list");
 var localStorageGetZipCodes = "zip-code-list";
@@ -34,6 +42,8 @@ var zipcode = document.querySelector("#zip");
 
 searchBtn.addEventListener("click", function () {
   var zipcode = document.querySelector("#zip");
+
+  //unhide food choices
   if (zipcode.value) {
     var unhideFoodChoices = document.getElementById("restaurant-results-container");
     unhideFoodChoices.classList.remove("hide");
@@ -163,7 +173,6 @@ displayRestaurants = function (data) {
     var categoryBtn = document.createElement("button");
     restaurantEl.appendChild(categoryBtn);
     categoryBtn.setAttribute("class", "btn, restaurant-btn");
-    categoryBtn.setAttribute("font-family", "Anton");
     categoryBtn.textContent = categoriesArray[i];
     categoryBtn.addEventListener("click", function (event) {
       restaurantNames(event);
