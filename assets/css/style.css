@@ -71,7 +71,7 @@ body {
   flex-flow: column;
   align-items: center;
   justify-content: center;
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 #search-container {
@@ -136,6 +136,11 @@ body {
   display: flex;
   flex-flow: column;
   align-items: center;
+}
+
+.restaurant-result {
+  margin: 5px;
+  border: 1px solid;
 }
 
 #results-container .card {
@@ -262,9 +267,12 @@ input:focus:-ms-input-placeholder {
   background: transparent;
 }
 
-.restaurant-result {
-  margin: 5px;
-  border: 1px solid;
+.page-footer .footer-copyright {
+  background-color: transparent;
+  color: black;
+  font-family: var(--main-text);
+  font-size: 11px;
+  text-transform: uppercase;
 }
 
 /* HIDE FUNCTION */
