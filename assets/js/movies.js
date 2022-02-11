@@ -20,7 +20,7 @@ var getMovieData = function (movieTitle) {
     if (response.ok) {
       response.json().then(function (data) {
         var dataArr = data.Search;
-        for (var i = 0; i < dataArr.length; i++) {
+        for (var i = 0; i < 4; i++) {
           var imdbID = dataArr[i].imdbID;
           var Title = dataArr[i].Title;
           var Year = dataArr[i].Year;

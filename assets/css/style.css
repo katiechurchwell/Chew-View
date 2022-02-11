@@ -245,7 +245,7 @@ input:focus:-ms-input-placeholder {
   opacity: 0;
 } /* IE 10+ */
 
-/* MOVIE CARD STYLES */
+/* MOVIES */
 #movie-card-con {
   display: flex;
   flex-wrap: wrap;
@@ -282,13 +282,19 @@ input:focus:-ms-input-placeholder {
 #movie-results-container #search-form {
   display: flex;
   flex-flow: column;
-  width: 50%;
 }
 
 #movie {
   align-items: center;
   justify-content: center;
   background: var(--beige);
+}
+
+#movie-search-input {
+  width: fit-content;
+  text-align: center;
+  background: var(--beige);
+  border-radius: var(--border-radius);
 }
 
 /* FOOTER STYLES */
