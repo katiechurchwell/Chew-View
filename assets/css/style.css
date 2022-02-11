@@ -137,14 +137,23 @@ body {
   display: flex;
   flex-flow: column;
   align-items: center;
+  width: 45vw;
+  height: 85.29%;
+  background: var(--beige);
+  border-radius: var(--border-radius);
+  margin: 4px;
+  justify-content: center;
 }
 
-#restaurant-list btn {
+#restaurant button {
   border: 0;
   padding: 5px;
   margin: 5px;
-  width: 200px;
+  width: 80%;
   height: fit-content;
+  margin: 5px;
+  justify-content: center;
+  font-family: var(--main-text);
 }
 
 #results-container .card {

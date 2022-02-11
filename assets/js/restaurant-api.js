@@ -11,7 +11,9 @@ searchBtn.addEventListener("click", function () {
 
   //unhide food choices
   if (zipcode.value) {
-    var unhideFoodChoices = document.getElementById("restaurant-results-container");
+    var unhideFoodChoices = document.getElementById(
+      "restaurant-results-container"
+    );
     unhideFoodChoices.classList.remove("hide");
     generateGeocode(zipcode.value);
     displayZips(zipcode);
@@ -22,7 +24,6 @@ searchBtn.addEventListener("click", function () {
 
 // GEOCODING API CALL FOR ZIP CODE INFORMATION
 generateGeocode = function (zipcode) {
-
   var geocodeApiUrl =
     "https://forward-reverse-geocoding.p.rapidapi.com/v1/forward?postalcode=" +
     zipcode +
@@ -116,7 +117,7 @@ displayRestaurants = function (data) {
         Object.keys(restaurantArray[i].cuisine).length != 0
       ) {
         if (restaurantArray[i].cuisine[0].name === event.target.textContent) {
-          // 
+          //
           var restaurantObject = new Object();
           restaurantObject.name = restaurantArray[i].name;
           restaurantObject.address = restaurantArray[i].address;
@@ -129,7 +130,10 @@ displayRestaurants = function (data) {
           // RESTAURANT RESULTS
           var restaurantContainer = document.createElement("div");
           restaurantEl.appendChild(restaurantContainer);
-          restaurantContainer.setAttribute("class", "restaurant-result hoverable");
+          restaurantContainer.setAttribute(
+            "class",
+            "restaurant-result hoverable"
+          );
 
           // RESTAURANT MODAL TRIGGER
           var restaurant = document.createElement("button");
