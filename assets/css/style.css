@@ -56,6 +56,7 @@ body {
   font-family: var(--header-text);
   line-height: 0.8;
   text-transform: uppercase;
+  font-size: 80px;
 }
 
 #header p {
@@ -74,7 +75,7 @@ body {
   padding-top: 20px;
 }
 
-#search-container {
+#zipcode-ask .search-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -136,15 +137,27 @@ body {
   display: flex;
   flex-flow: column;
   align-items: center;
+  width: 300px;
 }
 
 .restaurant-result {
   margin: 5px;
-  border: 1px solid;
+  border: none;
+}
+
+#restaurant-result btn {
+  border: 0;
+  padding: 5px;
+  margin: 5px;
+  width: 200px;
+  height: fit-content;
+  line-height: 1;
+  color: black;
 }
 
 #results-container .card {
   display: flex;
+  margin: 10px;
 }
 
 .restaurant-btn {
@@ -258,6 +271,24 @@ input:focus:-ms-input-placeholder {
 .movie-poster-img {
   width: 100%;
   height: auto;
+}
+
+#movie-results-container {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+#movie-results-container #search-form {
+  display: flex;
+  flex-flow: column;
+  width: 50%;
+}
+
+#movie {
+  align-items: center;
+  justify-content: center;
+  background: var(--beige);
 }
 
 /* FOOTER STYLES */
