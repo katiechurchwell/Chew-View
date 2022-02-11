@@ -99,7 +99,7 @@ displayRestaurants = function (data) {
   for (var i = 0; i < categoriesArray.length; i++) {
     var categoryBtn = document.createElement("button");
     restaurantEl.appendChild(categoryBtn);
-    categoryBtn.setAttribute("class", "btn, restaurant-btn");
+    categoryBtn.setAttribute("class", "btn, restaurant-btn, hoverable");
     categoryBtn.textContent = categoriesArray[i];
     categoryBtn.addEventListener("click", function (event) {
       restaurantNames(event);
@@ -129,7 +129,7 @@ displayRestaurants = function (data) {
           // RESTAURANT RESULTS
           var restaurantContainer = document.createElement("div");
           restaurantEl.appendChild(restaurantContainer);
-          restaurantContainer.setAttribute("class", "restaurant-result");
+          restaurantContainer.setAttribute("class", "restaurant-result hoverable");
 
           // RESTAURANT MODAL TRIGGER
           var restaurant = document.createElement("button");

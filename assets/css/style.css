@@ -129,42 +129,27 @@ body {
   display: flex;
   flex-flow: column;
   align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
 }
 
 #restaurant {
-  background: var(--beige);
-  border-radius: var(--border-radius);
   display: flex;
   flex-flow: column;
   align-items: center;
-  width: 300px;
 }
 
-.restaurant-result {
-  margin: 5px;
-  border: none;
-}
-
-#restaurant-result btn {
+#restaurant-list btn {
   border: 0;
   padding: 5px;
   margin: 5px;
   width: 200px;
   height: fit-content;
-  line-height: 1;
-  color: black;
 }
 
 #results-container .card {
   display: flex;
   margin: 10px;
-}
-
-.restaurant-btn {
-  border: 0;
-  padding: 5px;
-  margin: 5px;
-  width: 200px;
 }
 
 #restaurant-list {
@@ -277,6 +262,7 @@ input:focus:-ms-input-placeholder {
   display: flex;
   flex-flow: column;
   align-items: center;
+  background-color: transparent;
 }
 
 #movie-results-container #search-form {
@@ -288,6 +274,10 @@ input:focus:-ms-input-placeholder {
   align-items: center;
   justify-content: center;
   background: var(--beige);
+  border-radius: var(--border-radius);
+  margin: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 #movie-search-input {

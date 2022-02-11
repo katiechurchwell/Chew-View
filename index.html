@@ -39,31 +39,32 @@
   <!-- ZIPCODE ASK -->
   <section id="zipcode-ask">
     <!-- ZIP CODE / RESTAURANTS SEARCH FUNCTIONS -->
-      <div class="search row search-container">
-          <label class="section-header">What's your zipcode?</label>
-          <input type="text" id="zip" class="zip-select" pattern="[0-9]{5}" placeholder="00000"
-            onfocus="this.placeholder=''" />
-          <button type="submit" id="submit" class="btn search-btn">
-            SEARCH
-          </button>
+    <div class="search row search-container">
+      <label class="section-header">What's your zipcode?</label>
+      <input type="text" id="zip" class="zip-select" pattern="[0-9]{5}" placeholder="00000"
+        onfocus="this.placeholder=''" />
+      <button type="submit" id="submit" class="btn search-btn">
+        SEARCH
+      </button>
 
-        <!-- ZIP CODE SEARCH HISTORY -->
-        <div id="zip-search-container" class="zip-search-choice col s12">
-          <ul id="zip-list" class="zip-list-group"></ul>
-        </div>
-        <button type="clear" id="clear" class="btn clear-btn hide">
-          Clear Search History
-        </button>
+      <!-- ZIP CODE SEARCH HISTORY -->
+      <div id="zip-search-container" class="zip-search-choice col s12">
+        <ul id="zip-list" class="zip-list-group"></ul>
       </div>
+      <button type="clear" id="clear" class="btn clear-btn hide">
+        Clear Search History
+      </button>
+    </div>
     </div>
     </div>
   </section>
 
   <!-- ALL RESULTS -->
-  <!-- RESTAURANT CONTAINER -->
   <div id="results-container" class="results row hide">
+
+    <!-- RESTAURANT CONTAINER -->
     <div id="restaurant-results-container" class="restaurant-results col s12 m6 hide">
-      <label id="restaurant-label" class="section-header">Restaurants</label>
+      <div id="restaurant-header"><label id="restaurant-label" class="section-header">Restaurants</label></div>
       <div class="card horizontal">
         <div class="card-stacked">
           <div name="restaurant-list" id="restaurant" class="restaurant-select card-content"></div>
@@ -80,22 +81,17 @@
       </div>
     </div>
 
-    <!-- MOVIE SEARCH FUNCTION -->
+    <!-- MOVIE CONTAINER -->
     <div id="movie-results-container" class="movie-results col s12 m6">
-      <div class="search-container">
-        <div id=search-input-container>
-          <form action="submit" id="search-form">
-            <label for="movie-search-input" class="section-header">Movies</label>
-            <input type="text" id="movie-search-input" placeholder="Click here to search" onfocus="this.placeholder=''">
-            <button type="submit" id="movie-btn" class="btn movie-btn">Search Movies</button>
-          </form>
-        </div>
-
-        <!-- MOVIE SEARCH RESULTS -->
+      <!-- MOVIE SEARCH -->
+      <div id=search-input-container>
+        <form action="submit" id="search-form">
+          <label for="movie-search-input" class="section-header">Movies</label>
+          <input type="text" id="movie-search-input" placeholder="Click here to search" onfocus="this.placeholder=''">
+          <button type="submit" id="movie-btn" class="btn movie-btn">Search Movies</button>
+        </form>
       </div>
-      <div id="movie-card-con" class="container">
-        <div name="movie-list" id="movie" class="movie-select row justify-content-center"></div>
-      </div>
+      <div name="movie-list" id="movie" class="movie-select row justify-content-center"></div>
     </div>
   </div>
 
@@ -114,7 +110,7 @@
   <!-- FOOTER -->
   <footer id="footer" class="page-footer center-align">
     <div class="footer-copyright">
-      <div class="container">&copy; 2021 Chew & View</div>
+      <div class="container">&copy; 2022 Chew & View</div>
     </div>
   </footer>
 

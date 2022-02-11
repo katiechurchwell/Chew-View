@@ -1,3 +1,11 @@
+//SET RESTAURANT CONTAINER EQUAL TO MOVIE CONTAINER
+var movieHeight = document.getElementById("movie").style.height;
+var restaurantHeight = document.getElementById("restaurant").style.height;
+
+if (restaurantHeight < movieHeight) {
+  restaurantHeight = movieHeight;
+}
+
 //ON ANY BUTTON CLICK, UNHIDE RESULTS
 var resultsContainer = document.querySelector("#results-container");
 document.querySelectorAll(".btn").forEach(button => {
