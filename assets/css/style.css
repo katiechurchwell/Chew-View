@@ -146,15 +146,21 @@ body {
 }
 
 #restaurant button {
-  border: 0;
+  border: none;
   padding: 5px;
   margin: 5px;
-  width: 80%;
   height: fit-content;
   margin: 5px;
   justify-content: center;
   font-family: var(--main-text);
+  color: var(--dark);
+  line-height: 1.5;
 }
+
+#restaurant button {
+  background: transparent;
+}
+
 
 #results-container .card {
   display: flex;
