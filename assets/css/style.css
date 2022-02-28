@@ -25,8 +25,8 @@ a:hover {
 
 /* HEADER STYLES */
 .logo {
-  height: 20px;
-  width: 150px;
+  height: 40px;
+  width: 200px;
   overflow: hidden;
   object-fit: cover;
 }
@@ -68,12 +68,7 @@ a:hover {
   padding-top: 20px;
 }
 
-#zipcode-ask .search-container {
-  width: 40%;
-  align-items: center;
-  justify-content: center;
-}
-
+/* history container */
 #zip-search-container {
   display: flex;
   align-items: center;
@@ -81,6 +76,7 @@ a:hover {
   padding-top: 10px;
 }
 
+/* zip input */
 #zip {
   text-align: center;
   background: var(--accent);
@@ -151,12 +147,6 @@ a:hover {
 }
 
 /* BUTTONS AND INPUTS */
-.btn {
-  background-color: transparent;
-  border-radius: var(--border-radius);
-  border: 1px dashed black;
-  margin: 5px;
-}
 
 .dropdown-content li > a {
   color: var(--dark);
