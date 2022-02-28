@@ -6,7 +6,7 @@
   --subtle-text: #868581;
   --border-radius: 0.3rem;
   --main-text: "Open Sans", sans-serif;
-  --header-text: "Open Sans", sans-serif;
+  --header-text: "Quicksand", sans-serif;
 }
 
 html {
@@ -39,12 +39,7 @@ body {
   display: flex;
 }
 .hero {
-  height: 600px;
-}
-
-#header {
-  display: flex;
-  flex-flow: column;
+  height: 550px;
 }
 
 #header h1 {
@@ -281,41 +276,17 @@ input:focus:-ms-input-placeholder {
 }
 
 /* FOOTER STYLES */
-#check-us-out {
-  margin: 5px;
-  width: fit-content;
-  padding-left: 10px;
-  padding-right: 10px;
-  border-radius: var(--border-radius);
-  line-height: 2;
-}
-
-#check-us-out a {
-  color: var(--subtle-text);
-  font-size: 9px;
-  font-weight: bold;
-  display: flex;
-  align-items: center;
-}
-
-#check-us-out i {
-  font-size: 25px;
-  padding-right: 5px;
-  color: var(--subtle-text);
-}
-
-.page-footer {
-  font-family: var(--main-text);
-  border: none;
-  background: transparent;
-}
-
-.page-footer .footer-copyright {
+footer {
+  position: sticky;
+  bottom: 0;
   background-color: transparent;
+  border: none;
+}
+
+footer a {
   color: var(--subtle-text);
   font-family: var(--main-text);
   font-size: 11px;
-  text-transform: uppercase;
 }
 
 /* HIDE FUNCTION */
