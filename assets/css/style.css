@@ -1,17 +1,20 @@
 /* SITE STYLE PALETTE */
 :root {
-  --dark: #171219;
-  --orange: #ff6624;
-  --light-orange: #ffaa04;
-  --beige: #fff8e9;
-  --gray: #e2dbcd;
+  --background: #FFF8EA;
+  --accent: #D5F1E5;
+  --button: #E2DBCD;
+  --subtle-text: #868581;
   --border-radius: 0.3rem;
   --main-text: "Open Sans", sans-serif;
-  --header-text: "Shrikhand", cursive;
+  --header-text: "Open Sans", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--orange);
+  background: var(--background);
   height: 100vh;
   transition: ease;
 }
@@ -32,38 +35,27 @@ body {
 }
 
 /* HEADER STYLES */
-#check-us-out {
-  margin: 5px;
+.landing-page {
+  display: flex;
 }
-
-#check-us-out a {
-  color: black;
-  font-size: 9px;
-  font-weight: bold;
-  text-transform: uppercase;
+.hero {
+  height: 600px;
 }
 
 #header {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
+  flex-flow: column;
 }
 
 #header h1 {
-  color: var(--beige);
-  text-shadow: 2px 2px 3px var(--light-orange);
+  color: black;
   font-family: var(--header-text);
-  line-height: 0.8;
-  text-transform: uppercase;
-  font-size: 80px;
+  font-size: 45px;
 }
 
 #header p {
-  color: var(--beige);
-  line-height: 0.5;
+  color: black;
   font-family: var(--main-text);
-  font-style: italic;
 }
 
 /* ZIPCODE */
@@ -93,7 +85,7 @@ body {
 
 #zip {
   text-align: center;
-  background: var(--beige);
+  background: var(--accent);
   border-radius: var(--border-radius);
 }
 
@@ -103,20 +95,11 @@ body {
 
 /* SECTION TITLE STYLES */
 .section-header {
-  color: var(--beige);
+  color: black;
   font-family: var(--main-text);
   font-size: 20px;
   text-align: center;
-  text-transform: uppercase;
 }
-
-/* SEARCH PLACEHOLDER TEXT STYLES */
-/* ::placeholder {
-  color: var(--dark);
-  font-weight: light;
-  opacity: 0.5;
-  text-shadow: 1px 1px 1px var(--orange);
-} */
 
 /* RESTAURANT RESULTS CONTAINER STYLES */
 .food-select {
@@ -139,7 +122,6 @@ body {
   align-items: center;
   width: 45vw;
   height: 85.29%;
-  background: var(--beige);
   border-radius: var(--border-radius);
   margin: 4px;
   justify-content: center;
@@ -153,14 +135,11 @@ body {
   margin: 5px;
   justify-content: center;
   font-family: var(--main-text);
-  color: var(--dark);
+  color: var(--button);
   line-height: 1.5;
-}
-
-#restaurant button {
   background: transparent;
+  font-size: 20px;
 }
-
 
 #results-container .card {
   display: flex;
@@ -179,7 +158,7 @@ body {
 }
 
 .dropdown-content li > a {
-  color: black;
+  color: var(--dark);
   align-items: center;
 }
 
@@ -190,7 +169,7 @@ body {
 }
 
 .modal-content {
-  background-color: var(--gray);
+  background-color: var(--button);
   font-weight: light;
 }
 
@@ -288,7 +267,6 @@ input:focus:-ms-input-placeholder {
 #movie {
   align-items: center;
   justify-content: center;
-  background: var(--beige);
   border-radius: var(--border-radius);
   margin: 5px;
   padding-top: 10px;
@@ -298,11 +276,34 @@ input:focus:-ms-input-placeholder {
 #movie-search-input {
   width: fit-content;
   text-align: center;
-  background: var(--beige);
+  background: var(--button);
   border-radius: var(--border-radius);
 }
 
 /* FOOTER STYLES */
+#check-us-out {
+  margin: 5px;
+  width: fit-content;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: var(--border-radius);
+  line-height: 2;
+}
+
+#check-us-out a {
+  color: var(--subtle-text);
+  font-size: 9px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+#check-us-out i {
+  font-size: 25px;
+  padding-right: 5px;
+  color: var(--subtle-text);
+}
+
 .page-footer {
   font-family: var(--main-text);
   border: none;
@@ -311,7 +312,7 @@ input:focus:-ms-input-placeholder {
 
 .page-footer .footer-copyright {
   background-color: transparent;
-  color: black;
+  color: var(--subtle-text);
   font-family: var(--main-text);
   font-size: 11px;
   text-transform: uppercase;

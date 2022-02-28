@@ -22,8 +22,69 @@ searchBtn.addEventListener("click", function () {
   }
 });
 
+// CHECKS LOCAL STORAGE FOR ZIP CODE SEARCH HISTORY & AUTO-POPULATES ALL EXISTING ZIP CODES AS BUTTONS
+var zipSearchContainerEl = document.querySelector("#zip-list");
+var localStorageGetZipCodes = "zip-code-list";
+var zipCodeArray;
+
+if (localStorage.getItem(localStorageGetZipCodes)) {
+  zipCodeArray =
+    JSON.parse(localStorage.getItem(localStorageGetZipCodes)) || [];
+  zipCodeArray.forEach((element) => {
+    var zipEl = document.createElement("li");
+    zipEl.classList = "btn zip-btn zip-btn:hover col-lg-3 col-md-3 col-sm-12";
+    zipEl.textContent = element;
+    zipSearchContainerEl.appendChild(zipEl);
+  });
+  var unhideClearButton = document.getElementById("clear");
+  unhideClearButton.classList.remove("hide");
+} else {
+  zipCodeArray = [];
+}
+
+zipEl.addEventListener("click", function (event) {
+  var unhideFoodChoices = document.getElementById(
+    "restaurant-results-container"
+  );
+  unhideFoodChoices.classList.remove("hide");
+  generateGeocode(event.target.textContent);
+});
+
+// DISPLAY SEARCHED ZIP CODES AS BUTTONS WITHOUT REPEATING ZIP CODES ALREADY SEARCHED
+var displayZips = function (zipcode) {
+  var unhideClearButton = document.getElementById("clear");
+  unhideClearButton.classList.remove("hide");
+  let inArray = false;
+  for (let i = 0; i < zipCodeArray.length; i++) {
+    if (zipCodeArray[i] === zipcode.value) {
+      inArray = true;
+    }
+  }
+  if (!inArray) {
+    zipCodeArray.push(zipcode.value);
+    var zipEl = document.createElement("li");
+    zipEl.classList = "btn zip-btn zip-btn:hover col-lg-3 col-md-3 col-sm-12";
+    zipEl.textContent = zipcode.value;
+    zipSearchContainerEl.appendChild(zipEl);
+    localStorage.setItem(localStorageGetZipCodes, JSON.stringify(zipCodeArray));
+  }
+};
+
+// 'CLEAR SEARCH HISTORY' BUTTON FUNCTIONS
+var clearSearch = document.querySelector("#clear");
+
+var clearHistory = function () {
+  var hideClearButton = document.getElementById("clear");
+  hideClearButton.classList.add("hide");
+  localStorage.clear();
+  document.location.reload(true);
+};
+
+clearSearch.addEventListener("click", clearHistory);
+
+
 // GEOCODING API CALL FOR ZIP CODE INFORMATION
-generateGeocode = function (zipcode) {
+function generateGeocode(zipcode) {
   var geocodeApiUrl =
     "https://forward-reverse-geocoding.p.rapidapi.com/v1/forward?postalcode=" +
     zipcode +
@@ -40,7 +101,7 @@ generateGeocode = function (zipcode) {
       getRestaurants(location);
     });
   });
-};
+}
 
 // USE COORDINATES OBTAINED FROM GEOCODE API CALL TO MAKE TRAVEL ADVISOR API CALL
 getRestaurants = function (location) {
@@ -78,6 +139,9 @@ var restaurantArrayCategory = []; //modal generation
 
 // POPULATE RESTAURANT RESULTS TO CONTAINER
 displayRestaurants = function (data) {
+  //SCROLL TO VIEW
+  document.getElementById("results-container").scrollIntoView();
+
   // CLEAR CONTAINER
   restaurantEl.innerHTML = "";
   var restaurantArray = data.data;
@@ -187,3 +251,12 @@ var displayModal = function (event) {
     }
   }
 };
+
+//ON ANY BUTTON CLICK, UNHIDE RESULTS
+var resultsContainer = document.querySelector("#results-container");
+
+document.querySelectorAll(".btn").forEach((button) => {
+  button.addEventListener("click", (event) => {
+    resultsContainer.classList.remove("hide");
+  });
+});
