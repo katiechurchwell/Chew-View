@@ -110,6 +110,7 @@ displayRestaurants = function (data) {
   var restaurantArrayCategory = [];
 
   var displayModal = function (event) {
+    event.preventDefault();
     for (var i = 0; i < restaurantArrayCategory.length; i++) {
       if (restaurantArrayCategory[i].name === event.target.textContent) {
         var modalData = new Object();
@@ -136,9 +137,12 @@ displayRestaurants = function (data) {
     </ul>
     </center>`;
 
-    var modal = document.getElementById('restaurant-modal')
-    modal.getElementsByClassName("modal-title").innerText = name;
-    $('#restaurant-modal').modal('show')
+    var modal = document.getElementById('restaurant-modal');
+    var title = modal.getElementsByClassName("modal-title")[0];
+    var body = modal.getElementsByClassName("modal-body")[0] 
+    title.textContent = name;
+    body.innerHTML = markup;
+    $('#restaurant-modal').modal('show');
   };
 
   // GENERATE RESTAURANT SUGGESTION RESULTS
