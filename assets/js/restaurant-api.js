@@ -127,30 +127,18 @@ displayRestaurants = function (data) {
     var phone = modalData.phone;
     var website = modalData.website;
 
-    const modalItem = document.getElementById("restaurant-modal");
+    var markup = `<img src="${imgSrc}" alt="Photo of ${name}">
+    <center>
+    <ul>
+    <li>${address}</li>
+    <li>${phone}</li>
+    <li><a href="${website}>${website}</a></li>
+    </ul>
+    </center>`;
 
-    modalItem.innerHTML = "";
-    modalItem.innerHTML = `
-        <div class="modal-dialog">
-        <div class="modal-content">
-        <div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">${name}</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-        <img src="${imgSrc}" alt="Photo of ${name}">
-        <center>
-        <ul>
-        <li>${address}</li>
-        <li>${phone}</li>
-        <li><a href="${website}>${website}</a></li>
-        </ul>
-        </center>
-        </div>
-        </div>
-        </div>
-        `;
-
-    new bootstrap.Modal(modalItem).show();
+    var modal = document.getElementById('restaurant-modal')
+    modal.getElementsByClassName("modal-title").innerText = name;
+    $('#restaurant-modal').modal('show')
   };
 
   // GENERATE RESTAURANT SUGGESTION RESULTS
@@ -180,11 +168,11 @@ displayRestaurants = function (data) {
             "class",
             "btn btn-outline-secondary m-1 restaurant-btn"
           );
-          restaurant.setAttribute("data-bs-toggle", "modal"); //modal trigger
-          restaurant.setAttribute("data-bs-target", "#restaurant-modal"); //modal link
+          // restaurant.setAttribute("data-bs-toggle", "modal"); //modal trigger
+          // restaurant.setAttribute("data-bs-target", "#restaurant-modal"); //modal link
           restaurantEl.appendChild(restaurant);
           restaurant.addEventListener("click", function (event) {
-            // displayModal(event);
+            displayModal(event);
           });
         }
       }
