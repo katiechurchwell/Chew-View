@@ -112,17 +112,25 @@ displayRestaurants = function (data) {
   var displayModal = function (event) {
     for (var i = 0; i < restaurantArrayCategory.length; i++) {
       if (restaurantArrayCategory[i].name === event.target.textContent) {
-        // MODAL CONTENTS
-        var name = restaurantArrayCategory[i].name;
-        var address = restaurantArrayCategory[i].address;
-        var imgSrc = restaurantArrayCategory[i].imgSrc;
-        var phone = restaurantArrayCategory[i].phone;
-        var website = restaurantArrayCategory[i].website;
+        var modalData = new Object();
+        modalData.name = restaurantArray[i].name;
+        modalData.address = restaurantArray[i].address;
+        modalData.imgSrc = restaurantArray[i].photo.images.small.url;
+        modalData.phone = restaurantArray[i].phone;
+        modalData.website = restaurantArray[i].website;
+      }
+    }
+    // MODAL CONTENTS
+    var name = modalData.name;
+    var address = modalData.address;
+    var imgSrc = modalData.imgSrc;
+    var phone = modalData.phone;
+    var website = modalData.website;
 
-        const modalItem = document.getElementById('restaurant-modal');
-    
-        modalItem.innerHTML = '';
-        modalItem.innerHTML = `
+    const modalItem = document.getElementById("restaurant-modal");
+
+    modalItem.innerHTML = "";
+    modalItem.innerHTML = `
         <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">${name}</h5>
@@ -140,12 +148,9 @@ displayRestaurants = function (data) {
         </div>
         </div>
         </div>
-        `;;
-    
-        new bootstrap.Modal(modalItem).show();
+        `;
 
-      }
-    }
+    new bootstrap.Modal(modalItem).show();
   };
 
   // GENERATE RESTAURANT SUGGESTION RESULTS
@@ -168,23 +173,18 @@ displayRestaurants = function (data) {
 
           restaurantArrayCategory.push(restaurantObject);
 
-          // RESTAURANT RESULTS
-          var restaurantContainer = document.createElement("div");
-          restaurantEl.appendChild(restaurantContainer);
-          restaurantContainer.setAttribute("class", "restaurant-result");
-
           // RESTAURANT MODAL TRIGGER
           var restaurant = document.createElement("button");
           restaurant.innerHTML = restaurantObject.name; //populate results by name
           restaurant.setAttribute(
             "class",
             "btn btn-outline-secondary m-1 restaurant-btn"
-          ); //style
+          );
           restaurant.setAttribute("data-bs-toggle", "modal"); //modal trigger
           restaurant.setAttribute("data-bs-target", "#restaurant-modal"); //modal link
-          restaurantContainer.appendChild(restaurant);
+          restaurantEl.appendChild(restaurant);
           restaurant.addEventListener("click", function (event) {
-            displayModal(event);
+            // displayModal(event);
           });
         }
       }
@@ -193,7 +193,6 @@ displayRestaurants = function (data) {
 };
 
 // ZIP CODE SEARCH FUNCTION
-
 // ZIP CODE HISTORY
 if (localStorage.getItem(localStorageGetZipCodes)) {
   zipCodeArray =

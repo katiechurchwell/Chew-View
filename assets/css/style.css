@@ -20,6 +20,10 @@ body {
 }
 
 /* TEXT */
+ul {
+  text-decoration: none;
+}
+
 a {
   text-overflow: ellipsis;
   white-space: nowrap;
