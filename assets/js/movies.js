@@ -65,14 +65,13 @@ var displayMovieDetails = function (
   actorlist,
   review1,
   review2,
-  website
+  movieTitle
 ) {
-
   var markup = `<p>${plot}</p><p>Actors: ${actorlist}</p><p>Rotten Tomatoes: ${review1.Value}</p><p>Metacritic: ${review2.Value}</p><p>Release Date: ${date}</p>`;
   var modal = document.getElementById("movie-modal");
   var title = modal.getElementsByClassName("modal-title")[0];
   var body = modal.getElementsByClassName("modal-body")[0];
-  title.textContent = "Movie Details"
+  title.textContent = movieTitle;
   body.innerHTML = markup;
 
   $("#movie-modal").modal("show");
@@ -91,7 +90,7 @@ var getMovieDetails = function (imdbIDnum) {
         var actors = data.Actors;
         var rottenTomatoesReview = data.Ratings[1];
         var metacriticReview = data.Ratings[2];
-        var website = data.Website;
+        var title = data.Title;
 
         displayMovieDetails(
           plot,
@@ -99,7 +98,7 @@ var getMovieDetails = function (imdbIDnum) {
           actors,
           rottenTomatoesReview,
           metacriticReview,
-          website
+          title
         );
       });
     } else {
