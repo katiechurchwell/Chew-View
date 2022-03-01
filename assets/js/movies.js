@@ -1,8 +1,31 @@
 // GENERATING MOVIE DATA FROM OMDB API
-var movieSectionCon = document.querySelector("#movie");
-var movieFormEl = document.querySelector("#search-form");
-var movieSearchInputEl = document.querySelector("#movie-search-input");
+var resultsContainer = document.querySelector("#results-container"); //results container
+var movieSectionCon = document.querySelector("#movie"); //movie container
+var submitBtn = document.querySelector("#submit"); //zicode button
+var movieSearchInputEl = document.querySelector("#movie-search-input"); //movie input
 var searchBool = false;
+
+// DISPLAYS MOVIE CARDS ON HOMEPAGE
+var displayMovie = function (movieTitle, movieYear, posterUrl, imdbID) {
+  var movieContainer = document.createElement("div");
+  movieContainer.className = "card card-stacked movie-cardy hoverable";
+
+  var modalButtonEl = document.createElement("a");
+  modalButtonEl.className = "modal-trigger";
+  modalButtonEl.setAttribute("href", "#movie-modal");
+  movieContainer.appendChild(modalButtonEl);
+
+  var moviePosterEl = document.createElement("img");
+  moviePosterEl.className = "movie-poster-img";
+  moviePosterEl.setAttribute("src", posterUrl);
+  moviePosterEl.setAttribute("title", movieTitle);
+  moviePosterEl.setAttribute("imdbID", imdbID);
+  modalButtonEl.appendChild(moviePosterEl);
+
+  movieSectionCon.appendChild(movieContainer);
+};
+
+//API FETCH
 var getMovieData = function (movieTitle) {
   function removeChildren(parent) {
     while (parent.firstChild) {
@@ -35,6 +58,26 @@ var getMovieData = function (movieTitle) {
   });
 };
 
+// MOVIE DETAILS MODAL
+var displayMovieDetails = function (
+  plot,
+  date,
+  actorlist,
+  review1,
+  review2,
+  website
+) {
+
+  var markup = `<p>${plot}</p><p>Actors: ${actorlist}</p><p>Rotten Tomatoes: ${review1.Value}</p><p>Metacritic: ${review2.Value}</p><p>Release Date: ${date}</p>`;
+  var modal = document.getElementById("movie-modal");
+  var title = modal.getElementsByClassName("modal-title")[0];
+  var body = modal.getElementsByClassName("modal-body")[0];
+  title.textContent = "Movie Details"
+  body.innerHTML = markup;
+
+  $("#movie-modal").modal("show");
+};
+
 // ACQUIRE MOVIE DETAILS
 var getMovieDetails = function (imdbIDnum) {
   var apiKey = "403f37df";
@@ -63,56 +106,6 @@ var getMovieDetails = function (imdbIDnum) {
       console.log("response is not ok");
     }
   });
-};
-
-// MOVIE DETAILS MODAL
-var displayMovieDetails = function (
-  plot,
-  date,
-  actorlist,
-  review1,
-  review2,
-  website
-) {
-  var modalEl = document.querySelector("#movie-modal");
-  modalEl.innerHTML = "<div id='movie-modal' class='modal'></div>";
-
-  var modalContent = document.createElement("div");
-  modalContent.innerHTML = `<div class="modal-content"><h4>Movie Details</h4><p>${plot}</p><p>Actors: ${actorlist}</p><p>Rotten Tomatoes: ${review1.Value}</p><p>Metacritic: ${review2.Value}</p><p>Release Date: ${date}</p></div>`;
-  modalEl.appendChild(modalContent);
-
-  movieSectionCon.appendChild(modalEl);
-};
-
-// DISPLAYS MOVIE CARDS ON HOMEPAGE
-var displayMovie = function (movieTitle, movieYear, posterUrl, imdbID) {
-  var movieSectionCon = document.querySelector("#movie");
-
-  var movieContainer = document.createElement("div");
-  movieContainer.className = "card card-stacked movie-cardy hoverable";
-
-  // var movieTitleEl = document.createElement("h3");
-  // movieTitleEl.textContent = movieTitle;
-  // movieTitleEl.className = "activator";
-  // movieContainer.appendChild(movieTitleEl);
-
-  // var movieYearEl = document.createElement("h4");
-  // movieYearEl.textContent = movieYear;
-  // movieContainer.appendChild(movieYearEl);
-
-  var modalButtonEl = document.createElement("a");
-  modalButtonEl.className = "modal-trigger";
-  modalButtonEl.setAttribute("href", "#movie-modal");
-  movieContainer.appendChild(modalButtonEl);
-
-  var moviePosterEl = document.createElement("img");
-  moviePosterEl.className = "movie-poster-img";
-  moviePosterEl.setAttribute("src", posterUrl);
-  moviePosterEl.setAttribute("title", movieTitle);
-  moviePosterEl.setAttribute("imdbID", imdbID);
-  modalButtonEl.appendChild(moviePosterEl);
-
-  movieSectionCon.appendChild(movieContainer);
 };
 
 // AUTO-GENERATES RANDOM MOVIE SUGGESTIONS BASED ON KEYWORDS
@@ -191,7 +184,7 @@ movieClickHandler = function (event) {
 };
 
 movieSectionCon.addEventListener("click", movieClickHandler);
-movieFormEl.addEventListener("submit", movieClickHandler);
+submitBtn.addEventListener("submit", movieClickHandler);
 chooseMovieTitle();
 
-setInterval(chooseMovieTitle, 30000)
+setInterval(chooseMovieTitle, 30000);
