@@ -21,7 +21,7 @@ body {
 
 /* TEXT */
 li {
-  text-decoration: none;
+  list-style-type: none;
 }
 
 a {
@@ -151,6 +151,13 @@ header a {
 
 #restaurant-list {
   display: flex;
+}
+
+/* RESTAURANT MODALS */
+.modal-body img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* BUTTONS AND INPUTS */
