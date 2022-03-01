@@ -1,10 +1,9 @@
-var apiKey = "c449a8d1b1mshcbe3ee310732590p115c8ejsn3b8d1f48601a"; //My api key
+var apiKey = "c449a8d1b1mshcbe3ee310732590p115c8ejsn3b8d1f48601a";
+
+// CONTAINERS
 var resultsContainer = document.querySelector("#results-container"); //all results container
 var restaurantEl = document.querySelector("#restaurant-results-container"); //restaurant results container
 var zipSearchContainerEl = document.querySelector("#zip-search-container"); //zip history container
-var localStorageGetZipCodes = "zip-code-list";
-var searchBtn = document.querySelector("#submit"); //zip submit button
-var zipcode = document.querySelector("#zip"); //zip input field
 
 //REFORMAT LAYOUT ON SUBMIT
 function reformatLayout() {
@@ -68,7 +67,6 @@ generateGeocode = function (zipcode) {
 };
 
 // RESTAURANT RESULTS FUNCTIONS
-
 // POPULATE RESTAURANT RESULTS TO CONTAINER
 displayRestaurants = function (data) {
   //reformat layout
@@ -137,12 +135,12 @@ displayRestaurants = function (data) {
     </ul>
     </center>`;
 
-    var modal = document.getElementById('restaurant-modal');
+    var modal = document.getElementById("restaurant-modal");
     var title = modal.getElementsByClassName("modal-title")[0];
-    var body = modal.getElementsByClassName("modal-body")[0] 
+    var body = modal.getElementsByClassName("modal-body")[0];
     title.textContent = name;
     body.innerHTML = markup;
-    $('#restaurant-modal').modal('show');
+    $("#restaurant-modal").modal("show");
   };
 
   // GENERATE RESTAURANT SUGGESTION RESULTS
@@ -186,6 +184,8 @@ displayRestaurants = function (data) {
 
 // ZIP CODE SEARCH FUNCTION
 // ZIP CODE HISTORY
+var localStorageGetZipCodes = "zip-code-list";
+
 if (localStorage.getItem(localStorageGetZipCodes)) {
   zipCodeArray =
     JSON.parse(localStorage.getItem(localStorageGetZipCodes)) || [];
@@ -236,17 +236,29 @@ var displayZips = function (zipcode) {
 };
 
 //VALIDATE ZIPCODE
+var zipcode = document.querySelector("#zip"); //zip input field
+var zipcodeContainer = document.querySelector("#zipcode-ask");
+
 function isUSAZipCode(str) {
   return /^\d{5}(-\d{4})?$/.test(str);
 }
+var searchBtn = document.querySelector("#submit"); //zip submit button
 
 searchBtn.addEventListener("click", function (event) {
-  if (zipcode.value) {
+  if (document.getElementById("error")) {
+    document.getElementById("error").remove()
+  };
+  
+  if (isUSAZipCode(zipcode.value)) {
     resultsContainer.classList.remove("hide");
     generateGeocode(zipcode.value);
     displayZips(zipcode);
-
     zipcode.value = "";
+  } else {
+    var error = document.createElement("div");
+    error.setAttribute("id", "error");
+    error.innerText = "Invalid zipcode";
+    zipcodeContainer.appendChild(error);
   }
 });
 
