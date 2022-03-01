@@ -74,8 +74,8 @@ var displayMovieDetails = function (
   review2,
   website
 ) {
-  var modalEl = document.querySelector("#modal1");
-  modalEl.innerHTML = "<div id='modal1' class='modal'></div>";
+  var modalEl = document.querySelector("#movie-modal");
+  modalEl.innerHTML = "<div id='movie-modal' class='modal'></div>";
 
   var modalContent = document.createElement("div");
   modalContent.innerHTML = `<div class="modal-content"><h4>Movie Details</h4><p>${plot}</p><p>Actors: ${actorlist}</p><p>Rotten Tomatoes: ${review1.Value}</p><p>Metacritic: ${review2.Value}</p><p>Release Date: ${date}</p></div>`;
@@ -102,7 +102,7 @@ var displayMovie = function (movieTitle, movieYear, posterUrl, imdbID) {
 
   var modalButtonEl = document.createElement("a");
   modalButtonEl.className = "modal-trigger";
-  modalButtonEl.setAttribute("href", "#modal1");
+  modalButtonEl.setAttribute("href", "#movie-modal");
   movieContainer.appendChild(modalButtonEl);
 
   var moviePosterEl = document.createElement("img");

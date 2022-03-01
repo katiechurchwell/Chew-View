@@ -109,18 +109,10 @@ header a {
 }
 
 /* RESTAURANT RESULTS CONTAINER STYLES */
-.food-select {
-  width: max-content !important;
-  height: auto;
-  padding-top: 7px;
-}
-
-.restaurant-results {
+#restaurant-results-container {
   display: flex;
   flex-flow: column;
   align-items: center;
-  justify-content: space-between;
-  background-color: transparent;
 }
 
 #restaurant-card-container {
@@ -162,30 +154,6 @@ header a {
   color: var(--dark);
   align-items: center;
 }
-
-/* MODALS */
-.modal {
-  border-radius: var(--border-radius);
-  max-height: fit-content;
-}
-
-.modal-content {
-  background-color: var(--button);
-  font-weight: light;
-}
-
-.restaurant-img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.dropdown-trigger,
-.food-select {
-  width: 100%;
-  display: flex;
-}
-
 
 
 /* BROWSER-BASED STYLES */

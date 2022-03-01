@@ -1,18 +1,19 @@
 var apiKey = "c449a8d1b1mshcbe3ee310732590p115c8ejsn3b8d1f48601a"; //My api key
 var resultsContainer = document.querySelector("#results-container"); //all results container
-var restaurantEl = document.querySelector(".restaurant-results"); //restaurant results container
+var restaurantEl = document.querySelector("#restaurant-results-container"); //restaurant results container
 var zipSearchContainerEl = document.querySelector("#zip-search-container"); //zip history container
 var localStorageGetZipCodes = "zip-code-list";
 var searchBtn = document.querySelector("#submit"); //zip submit button
 var zipcode = document.querySelector("#zip"); //zip input field
 
-//Reformat Layout on submit
+//REFORMAT LAYOUT ON SUBMIT
 function reformatLayout() {
   const hero = document.querySelector(".hero");
   const title = document.querySelector(".title");
-  const zipcodeLabel = document.querySelector('#zipcode-label');
+  const zipcodeLabel = document.querySelector("#zipcode-label");
   hero.style.display = "none";
   title.style.display = "none";
+  zipcodeLabel.style.display = "none";
 }
 
 // USE COORDINATES OBTAINED FROM GEOCODE API CALL TO MAKE TRAVEL ADVISOR API CALL
@@ -62,18 +63,17 @@ generateGeocode = function (zipcode) {
   }).then(function (response) {
     response.json().then(function (location) {
       getRestaurants(location);
-      console.log(response);
     });
   });
 };
 
 // RESTAURANT RESULTS FUNCTIONS
-var restaurantArrayCategory = []; //modal generation
 
 // POPULATE RESTAURANT RESULTS TO CONTAINER
 displayRestaurants = function (data) {
+  //reformat layout
   reformatLayout();
-  // CLEAR CONTAINER
+  // clear container
   restaurantEl.innerHTML = "";
   var restaurantArray = data.data;
 
@@ -95,13 +95,58 @@ displayRestaurants = function (data) {
   for (var i = 0; i < categoriesArray.length; i++) {
     var categoryBtn = document.createElement("button");
     restaurantEl.appendChild(categoryBtn);
-    categoryBtn.setAttribute("class", "btn btn-outline-secondary m-1 restaurant-btn");
+    categoryBtn.setAttribute(
+      "class",
+      "btn btn-outline-secondary m-1 restaurant-btn"
+    );
     categoryBtn.setAttribute("font-family", "Open Sans");
     categoryBtn.textContent = categoriesArray[i];
     categoryBtn.addEventListener("click", function (event) {
       restaurantNames(event);
     });
   }
+
+  // RESTAURANT MODALS
+  var restaurantArrayCategory = [];
+
+  var displayModal = function (event) {
+    for (var i = 0; i < restaurantArrayCategory.length; i++) {
+      if (restaurantArrayCategory[i].name === event.target.textContent) {
+        // MODAL CONTENTS
+        var name = restaurantArrayCategory[i].name;
+        var address = restaurantArrayCategory[i].address;
+        var imgSrc = restaurantArrayCategory[i].imgSrc;
+        var phone = restaurantArrayCategory[i].phone;
+        var website = restaurantArrayCategory[i].website;
+
+        const modalItem = document.getElementById('restaurant-modal');
+    
+        modalItem.innerHTML = '';
+        modalItem.innerHTML = `
+        <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header"><h5 class="modal-title" id="exampleModalLabel">${name}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+        <img src="${imgSrc}" alt="Photo of ${name}">
+        <center>
+        <ul>
+        <li>${address}</li>
+        <li>${phone}</li>
+        <li><a href="${website}>${website}</a></li>
+        </ul>
+        </center>
+        </div>
+        </div>
+        </div>
+        `;;
+    
+        new bootstrap.Modal(modalItem).show();
+
+      }
+    }
+  };
 
   // GENERATE RESTAURANT SUGGESTION RESULTS
   restaurantNames = function (event) {
@@ -131,9 +176,12 @@ displayRestaurants = function (data) {
           // RESTAURANT MODAL TRIGGER
           var restaurant = document.createElement("button");
           restaurant.innerHTML = restaurantObject.name; //populate results by name
-          restaurant.setAttribute("class", "btn btn-outline-secondary m-1 modal-trigger restaurant-btn");
-          restaurant.setAttribute("href", "#restaurant-modal");
-          restaurant.setAttribute("id", [i]);
+          restaurant.setAttribute(
+            "class",
+            "btn btn-outline-secondary m-1 restaurant-btn"
+          ); //style
+          restaurant.setAttribute("data-bs-toggle", "modal"); //modal trigger
+          restaurant.setAttribute("data-bs-target", "#restaurant-modal"); //modal link
           restaurantContainer.appendChild(restaurant);
           restaurant.addEventListener("click", function (event) {
             displayModal(event);
@@ -144,58 +192,7 @@ displayRestaurants = function (data) {
   };
 };
 
-// RESTAURANT MODALS
-var displayModal = function (event) {
-  for (var i = 0; i < restaurantArrayCategory.length; i++) {
-    if (restaurantArrayCategory[i].name === event.target.textContent) {
-      // MODAL CONTENTS
-      var name = restaurantArrayCategory[i].name;
-      var address = restaurantArrayCategory[i].address;
-      var imgSrc = restaurantArrayCategory[i].imgSrc;
-      var phone = restaurantArrayCategory[i].phone;
-      var website = restaurantArrayCategory[i].website;
-
-      var img = document.createElement("img");
-      img.src = imgSrc;
-      img.setAttribute("class", "restaurant-img");
-      img.setAttribute("id", "restaurant-img");
-
-      var modalEl = document.querySelector("#restaurant-modal");
-      modalEl.innerHTML =
-        '<center><div class="modal-content"><h4>' + name + "</h4></center>";
-      modalEl.appendChild(img);
-      modalEl.insertAdjacentHTML(
-        "beforeend",
-        "<center><p>" +
-          address +
-          "</p><p>" +
-          phone +
-          "</p><p>" +
-          '<a href="' +
-          website +
-          '">' +
-          website +
-          "</a></p></center>"
-      );
-    }
-  }
-};
-
 // ZIP CODE SEARCH FUNCTION
-//validate zipcode
-function isUSAZipCode(str) {
-  return /^\d{5}(-\d{4})?$/.test(str);
-}
-
-searchBtn.addEventListener("click", function (event) {
-  if (zipcode.value) {
-    resultsContainer.classList.remove("hide");
-    generateGeocode(zipcode.value);
-    displayZips(zipcode);
-
-    zipcode.value = "";
-  }
-});
 
 // ZIP CODE HISTORY
 if (localStorage.getItem(localStorageGetZipCodes)) {
@@ -246,6 +243,21 @@ var displayZips = function (zipcode) {
     localStorage.setItem(localStorageGetZipCodes, JSON.stringify(zipCodeArray));
   }
 };
+
+//VALIDATE ZIPCODE
+function isUSAZipCode(str) {
+  return /^\d{5}(-\d{4})?$/.test(str);
+}
+
+searchBtn.addEventListener("click", function (event) {
+  if (zipcode.value) {
+    resultsContainer.classList.remove("hide");
+    generateGeocode(zipcode.value);
+    displayZips(zipcode);
+
+    zipcode.value = "";
+  }
+});
 
 // 'CLEAR SEARCH HISTORY' BUTTON FUNCTIONS
 var clearSearch = document.querySelector("#clear");
