@@ -10,6 +10,7 @@ var zipcode = document.querySelector("#zip"); //zip input field
 function reformatLayout() {
   const hero = document.querySelector(".hero");
   const title = document.querySelector(".title");
+  const zipcodeLabel = document.querySelector('#zipcode-label');
   hero.style.display = "none";
   title.style.display = "none";
 }
@@ -94,7 +95,7 @@ displayRestaurants = function (data) {
   for (var i = 0; i < categoriesArray.length; i++) {
     var categoryBtn = document.createElement("button");
     restaurantEl.appendChild(categoryBtn);
-    categoryBtn.setAttribute("class", "btn btn-light restaurant-btn");
+    categoryBtn.setAttribute("class", "btn btn-outline-secondary m-1 restaurant-btn");
     categoryBtn.setAttribute("font-family", "Open Sans");
     categoryBtn.textContent = categoriesArray[i];
     categoryBtn.addEventListener("click", function (event) {
@@ -130,7 +131,7 @@ displayRestaurants = function (data) {
           // RESTAURANT MODAL TRIGGER
           var restaurant = document.createElement("button");
           restaurant.innerHTML = restaurantObject.name; //populate results by name
-          restaurant.setAttribute("class", "btn modal-trigger restaurant-btn");
+          restaurant.setAttribute("class", "btn btn-outline-secondary m-1 modal-trigger restaurant-btn");
           restaurant.setAttribute("href", "#restaurant-modal");
           restaurant.setAttribute("id", [i]);
           restaurantContainer.appendChild(restaurant);

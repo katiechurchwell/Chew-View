@@ -25,18 +25,22 @@
     <div class="logo-container">
       <img class="logo" src="./assets/img/Chew View-logos_black.png" alt="The Chew View logo">
     </div>
+    <div class="github"><a href="https://github.com/katiechurchwell/Chew-View"><i class="devicon-github-original"></i> Check us out on
+      GitHub!</a></div>
   </header>
   <!-- HERO -->
   <div class="landing-page container p-5">
     <!-- blob -->
     <svg id="blob" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-      <path fill="#FFFFFF" d="M41.4,-54.5C56.4,-46.1,73.1,-37.6,76.5,-25.3C79.9,-12.9,70.1,3.3,60.3,15.3C50.5,27.3,40.8,35.1,30.8,42.2C20.8,49.4,10.4,55.9,-2.3,59C-14.9,62.2,-29.8,61.9,-40.8,55C-51.7,48.2,-58.7,34.8,-65.9,19.7C-73.1,4.7,-80.6,-12,-79.2,-28.7C-77.8,-45.4,-67.6,-62.2,-53,-70.7C-38.3,-79.2,-19.1,-79.4,-3,-75.3C13.2,-71.2,26.4,-62.9,41.4,-54.5Z" transform="translate(100 100)" />
+      <path fill="#FFFFFF"
+        d="M41.4,-54.5C56.4,-46.1,73.1,-37.6,76.5,-25.3C79.9,-12.9,70.1,3.3,60.3,15.3C50.5,27.3,40.8,35.1,30.8,42.2C20.8,49.4,10.4,55.9,-2.3,59C-14.9,62.2,-29.8,61.9,-40.8,55C-51.7,48.2,-58.7,34.8,-65.9,19.7C-73.1,4.7,-80.6,-12,-79.2,-28.7C-77.8,-45.4,-67.6,-62.2,-53,-70.7C-38.3,-79.2,-19.1,-79.4,-3,-75.3C13.2,-71.2,26.4,-62.9,41.4,-54.5Z"
+        transform="translate(100 100)" />
     </svg>
     <div class="row">
       <div class="col hero">
         <img src="./assets/img/ice-cream.svg" alt="A person having funny holding a giant ice-cream cone!">
       </div>
-      <!-- HEADER -->
+      <!-- TITLE -->
       <div class="col">
         <div class="title p-1">
           <h1>
@@ -47,7 +51,7 @@
         <!-- ZIPCODE ASK -->
         <section id="zipcode-ask">
           <!-- ZIP CODE / RESTAURANTS SEARCH FUNCTIONS -->
-          <label class="section-header">Enter your zipcode to get started</label>
+          <label class="section-header" id="zipcode-label">Enter your zipcode to get started</label>
           <div class="input-group mt-3 d-flex justify-content-center">
             <input type="text" id="zip" class="zip-select" pattern="[0-9]{5}" placeholder="00000"
               onfocus="this.placeholder=''" />
@@ -67,54 +71,46 @@
   </div>
 
   <!-- ALL RESULTS -->
-  <div id="results-container" class="results row hide">
+  <div id="results-container" class="results container hide">
+    <div class="row">
+      <!-- RESTAURANT CONTAINER -->
+      <div class="restaurant-results col">
+        <label id="restaurant-label" class="section-header">Restaurants</label>
+        <div id="restaurant-card-container" class="restaurant-select card-content"></div>
+      </div>
 
-    <!-- RESTAURANT CONTAINER -->
-    <div class="restaurant-results col s12 m6">
-      <label id="restaurant-label" class="section-header">Restaurants</label>
-      <div id="restaurant-card-container" class="restaurant-select card-content"></div>
+      <!-- RESTAURANT DETAIL MODAL -->
+      <div id="restaurant-modal" class="modal">
+        <div class="modal-content">
+        </div>
+        <div class="modal-footer">
+          <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+      </div>
+
+      <!-- MOVIE CONTAINER -->
+      <div id="movie-results-container" class="movie-results col">
+        <!-- MOVIE SEARCH -->
+        <div id=search-input-container class="input-group mb-3 d-flex">
+            <input type="text" id="movie-search-input" placeholder="Movie keyword or title" onfocus="this.placeholder=''">
+            <button type="submit" id="movie-btn" class="btn btn-outline-secondary">Search</button>
+        </div>
+        <div name="movie-list" id="movie" class="movie-select row justify-content-center"></div>
+      </div>
     </div>
 
-    <!-- RESTAURANT DETAIL MODAL -->
-    <div id="restaurant-modal" class="modal">
+    <!-- MOVIE DETAIL MODAL -->
+    <div id="modal1" class="modal">
       <div class="modal-content">
+        <h4>Movie Details</h4>
+        <p>A bunch of text</p>
       </div>
       <div class="modal-footer">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
       </div>
     </div>
-
-    <!-- MOVIE CONTAINER -->
-    <div id="movie-results-container" class="movie-results col s12 m6">
-      <!-- MOVIE SEARCH -->
-      <div id=search-input-container>
-        <form action="submit" id="search-form">
-          <label for="movie-search-input" class="section-header">Movies</label>
-          <input type="text" id="movie-search-input" placeholder="Click here to search" onfocus="this.placeholder=''">
-          <button type="submit" id="movie-btn" class="btn movie-btn">Search Movies</button>
-        </form>
-      </div>
-      <div name="movie-list" id="movie" class="movie-select row justify-content-center"></div>
-    </div>
-  </div>
-
-  <!-- MOVIE DETAIL MODAL -->
-  <div id="modal1" class="modal">
-    <div class="modal-content">
-      <h4>Movie Details</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
-    </div>
   </div>
   </div>
-
-  <!-- FOOTER -->
-  <footer>
-    <p><a href="https://github.com/katiechurchwell/Chew-View"><i class="devicon-github-original"></i> Check us out on
-        GitHub!</a></p>
-  </footer>
 
   <!-- JAVASCRIPT SOURCES -->
   <script src="./assets/js/restaurant-api.js"></script>
