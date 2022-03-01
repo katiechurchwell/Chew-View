@@ -19,6 +19,13 @@ body {
   transition: ease;
 }
 
+/* TEXT */
+a {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
 a:hover {
   color: var(--hover);
 }
@@ -35,8 +42,8 @@ a:hover {
   position: absolute;
   z-index: -1;
   top: 0;
-  left: 23vw;
-  height: 90vh;
+  left: 20vw;
+  height: 100%;
 }
 
 /* icecream image */
@@ -83,10 +90,6 @@ a:hover {
   height: 50px;
 }
 
-#zip-list {
-  margin: 0;
-}
-
 /* SECTION TITLE STYLES */
 .section-header {
   color: black;
@@ -102,7 +105,7 @@ a:hover {
   padding-top: 7px;
 }
 
-#restaurant-results-container {
+.restaurant-results {
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -110,7 +113,7 @@ a:hover {
   background-color: transparent;
 }
 
-#restaurant {
+#restaurant-card-container {
   display: flex;
   flex-flow: column;
   align-items: center;
@@ -145,7 +148,6 @@ a:hover {
 }
 
 /* BUTTONS AND INPUTS */
-
 .dropdown-content li > a {
   color: var(--dark);
   align-items: center;
@@ -174,12 +176,7 @@ a:hover {
   display: flex;
 }
 
-/* TEXT STYLES */
-a {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
+
 
 /* BROWSER-BASED STYLES */
 ::-webkit-input-placeholder:hover {
@@ -232,10 +229,6 @@ input:focus:-ms-input-placeholder {
   margin: 0 10px;
 }
 
-.clear-btn {
-  overflow: hidden;
-}
-
 .movie-poster-img {
   width: 100%;
   height: auto;
@@ -269,7 +262,7 @@ input:focus:-ms-input-placeholder {
   border-radius: var(--border-radius);
 }
 
-/* FOOTER STYLES */
+/* FOOTER */
 footer {
   position: absolute;
   bottom: 0;
