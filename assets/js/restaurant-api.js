@@ -168,10 +168,8 @@ displayRestaurants = function (data) {
           restaurant.innerHTML = restaurantObject.name; //populate results by name
           restaurant.setAttribute(
             "class",
-            "btn btn-outline-secondary m-1 restaurant-btn"
+            "btn btn-outline-secondary m-1 w-50 restaurant-btn"
           );
-          // restaurant.setAttribute("data-bs-toggle", "modal"); //modal trigger
-          // restaurant.setAttribute("data-bs-target", "#restaurant-modal"); //modal link
           restaurantEl.appendChild(restaurant);
           restaurant.addEventListener("click", function (event) {
             displayModal(event);
@@ -182,7 +180,6 @@ displayRestaurants = function (data) {
   };
 };
 
-// ZIP CODE SEARCH FUNCTION
 // ZIP CODE HISTORY
 var localStorageGetZipCodes = "zip-code-list";
 

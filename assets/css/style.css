@@ -101,11 +101,14 @@ header a {
 }
 
 /* zip input */
-#zip {
+#zip, .zip-history{
   text-align: center;
   background: var(--accent);
   border-radius: var(--border-radius);
   border: none;
+}
+
+#zip {
   height: 50px;
 }
 
