@@ -36,12 +36,13 @@ var getMovieData = function (movieTitle) {
   removeChildren(movieSectionCon);
 
   var apiKey = "403f37df";
-
+  // https://www.omdbapi.com/?apikey=${apiKey}&s=${movieTitle}&type=movie&r=json
   fetch(
-    `https://www.omdbapi.com/?apikey=${apiKey}&s=${movieTitle}&type=movie&r=json`
+    `https://www.omdbapi.com/?apikey=${apiKey}&`
   ).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
+        console.log("movie data", data)
         var dataArr = data.Search;
         for (var i = 0; i < 4; i++) {
           var imdbID = dataArr[i].imdbID;
@@ -186,4 +187,4 @@ movieSectionCon.addEventListener("click", movieClickHandler);
 submitBtn.addEventListener("submit", movieClickHandler);
 chooseMovieTitle();
 
-setInterval(chooseMovieTitle, 30000);
+// setInterval(chooseMovieTitle, 30000);
