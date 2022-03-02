@@ -7,26 +7,32 @@ const apiKey = "2e30e0c5c0a8e70c539fdbad775c4919";
 // DISPLAYS MOVIE CARDS ON HOMEPAGE
 // image = https://image.tmdb.org/t/p/original/ + backdrop_path
 var displayMovies = function (movieData) {
+  //DISPLAY MOVIE GENRE BUTTONS
   fetch(
     `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`
   ).then(function (response) {
     if (response.ok) {
       response.json().then(function (genreData) {
+        //array of all possible genre ids with names
         const allGenresIds = genreData.genres.map((genre) => genre.id);
+        //array of genre Ids for popular movies
         const choiceGenres = movieData.map((movie) => movie.genre_ids[0]);
+        //overlap
         const genreMatches = allGenresIds.filter((element) =>
           choiceGenres.includes(element)
         );
 
+        //populate genre buttons to page
         for (i = 0; i < genreData.genres.length; i++) {
           if (genreMatches.includes(genreData.genres[i].id)) {
             var genreBtn = document.createElement("button");
-            genreBtn.textContent = genreData.genres[i].name
+            genreBtn.textContent = genreData.genres[i].name;
             genreBtn.setAttribute(
               "class",
               "btn btn-outline-secondary m-1 w-50 movieGenre-btn"
             );
             movieContainer.appendChild(genreBtn);
+            //add event listener for movieTitles function
           }
         }
       });
@@ -34,14 +40,6 @@ var displayMovies = function (movieData) {
       console.log("response is not ok");
     }
   });
-
-  //   var movieBtn = document.createElement("button");
-  //   movieBtn.textContent = genre;
-  //   movieBtn.setAttribute(
-  //     "class",
-  //     "btn btn-outline-secondary m-1 w-50 movie-btn"
-  //   );
-  //   movieSectionCon.appendChild(movieBtn);
 };
 
 //FETCH MOVIES (Top 20 most popular)
