@@ -1,13 +1,64 @@
-var resultsContainer = document.querySelector("#results-container"); //results container
-var movieContainer = document.querySelector("#movie"); //movie container
-var movieSearchInputEl = document.querySelector("#movie-search-input"); //movie input
-var searchBool = false;
+const resultsContainer = document.querySelector("#results-container");
+const movieContainer = document.querySelector("#movie-results-container");
+const genreContainer = document.querySelector("#movie-genre-container");
+const titleContainer = document.querySelector("#movie-title-container");
 const apiKey = "2e30e0c5c0a8e70c539fdbad775c4919";
 
-// DISPLAYS MOVIE CARDS ON HOMEPAGE
-// image = https://image.tmdb.org/t/p/original/ + backdrop_path
-var displayMovies = function (movieData) {
-  //DISPLAY MOVIE GENRE BUTTONS
+function displayMovies(movieData) {
+  // MOVIE DETAILS MODAL
+  var displayMovieDetails = function (event) {
+    let movieIndex = event.target.getAttribute("data-movie-id");
+    if (!movieIndex)
+      movieIndex = event.target.parentNode.getAttribute("data-movie-id");
+
+    const movie = movieData[movieIndex];
+
+    var movieTitle = movie.title;
+    var overview = movie.overview;
+    var date = movie.release_date;
+
+    var markup = `
+    <p>${overview}</p>
+    <p>Release Date: ${date}</p>`;
+    var modal = document.getElementById("movie-modal");
+    var title = modal.getElementsByClassName("modal-title")[0];
+    var body = modal.getElementsByClassName("modal-body")[0];
+    title.textContent = movieTitle;
+    body.innerHTML = markup;
+
+    $("#movie-modal").modal("show");
+  };
+
+  //DISPLAY MOVIE TITLES
+  function displayTitles(event) {
+    //find movie matches against genre selection
+    var genreSelection = event.target.getAttribute("data-genre-id");
+    for (i = 0; i < movieData.length; i++) {
+      if (movieData[i].genre_ids[0] == genreSelection) {
+        //create cards with title and image
+        var title = movieData[i].title;
+        var moviePoster =
+          "https://image.tmdb.org/t/p/original/" + movieData[i].backdrop_path;
+        var movieCard = document.createElement("div");
+        movieCard.setAttribute("class", "card");
+        movieCard.setAttribute("style", "width: 18rem;");
+        movieCard.setAttribute("data-movie-id", i);
+        movieCard.innerHTML = `
+        <img class="card-img-top" src="${moviePoster}" alt="Movie Poster of ${title}">
+        <h5 class="card-title">${title}</h5>
+        </div>
+        `;
+        //set modal event listener
+        movieCard.addEventListener("click", displayMovieDetails);
+        //hide genre buttons
+        genreContainer.setAttribute("class", "hide");
+        //add cards to page
+        titleContainer.appendChild(movieCard);
+      }
+    }
+  }
+
+  //DISPLAY MOVIE GENRES
   fetch(
     `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`
   ).then(function (response) {
@@ -31,8 +82,9 @@ var displayMovies = function (movieData) {
               "class",
               "btn btn-outline-secondary m-1 w-50 movieGenre-btn"
             );
-            movieContainer.appendChild(genreBtn);
-            //add event listener for movieTitles function
+            genreBtn.setAttribute("data-genre-id", genreData.genres[i].id);
+            genreBtn.addEventListener("click", displayTitles);
+            genreContainer.appendChild(genreBtn);
           }
         }
       });
@@ -40,18 +92,10 @@ var displayMovies = function (movieData) {
       console.log("response is not ok");
     }
   });
-};
+}
 
 //FETCH MOVIES (Top 20 most popular)
 var getMovieData = function () {
-  function removeChildren(parent) {
-    while (parent.firstChild) {
-      parent.removeChild(parent.firstChild);
-    }
-  }
-
-  removeChildren(movieContainer);
-
   fetch(
     `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
   ).then(function (response) {
@@ -65,40 +109,11 @@ var getMovieData = function () {
   });
 };
 
-// MOVIE DETAILS MODAL
-var displayMovieDetails = function (
-  plot,
-  date,
-  actorlist,
-  review1,
-  review2,
-  movieTitle
-) {
-  var markup = `<p>${plot}</p><p>Actors: ${actorlist}</p><p>Rotten Tomatoes: ${review1.Value}</p><p>Metacritic: ${review2.Value}</p><p>Release Date: ${date}</p>`;
-  var modal = document.getElementById("movie-modal");
-  var title = modal.getElementsByClassName("modal-title")[0];
-  var body = modal.getElementsByClassName("modal-body")[0];
-  title.textContent = movieTitle;
-  body.innerHTML = markup;
-
-  $("#movie-modal").modal("show");
-};
-
-// 'SEARCH MOVIES' BUTTON FUNCTIONS
-movieClickHandler = function (event) {
+// SUBMIT BUTTON HANDLER
+clickHandler = function (event) {
   event.preventDefault();
-  var target = event.target;
-
   getMovieData();
-
-  //   if (target.parentNode.parentNode.parentNode === movieSectionCon) {
-  //     getMovieDetails(target.attributes.imdbID.value);
-  //   } else if (target === movieFormEl) {
-  //     searchBool = true;
-  //   }
 };
-
-movieContainer.addEventListener("click", movieClickHandler);
 
 var submitBtn = document.querySelector("#submit"); //zipcode search button
-submitBtn.addEventListener("click", movieClickHandler);
+submitBtn.addEventListener("click", clickHandler);
