@@ -40,7 +40,7 @@ function displayMovies(movieData) {
         var moviePoster =
           "https://image.tmdb.org/t/p/original/" + movieData[i].backdrop_path;
         var movieCard = document.createElement("div");
-        movieCard.setAttribute("class", "card");
+        movieCard.setAttribute("class", "card m-3");
         movieCard.setAttribute("style", "width: 18rem;");
         movieCard.setAttribute("data-movie-id", i);
         movieCard.innerHTML = `

@@ -1,18 +1,23 @@
-// var resultsContainer = document.querySelector("#results-container");
-var restaurantContainer = document.querySelector(
+const restaurantContainer = document.querySelector(
   "#restaurant-results-container"
 );
-var zipSearchContainer = document.querySelector("#zip-search-container");
-var restaurantApiKey = "c449a8d1b1mshcbe3ee310732590p115c8ejsn3b8d1f48601a";
+const restaurantCategoryContainer = document.querySelector(
+  "#restaurant-category-container"
+);
+const restaurantNameContainer = document.querySelector(
+  "#restaurant-name-container"
+);
+const zipSearchContainer = document.querySelector("#zip-search-container");
+const restaurantApiKey = "c449a8d1b1mshcbe3ee310732590p115c8ejsn3b8d1f48601a";
 
 // USE COORDINATES OBTAINED FROM GEOCODE API CALL TO MAKE TRAVEL ADVISOR API CALL
 getRestaurants = function (location) {
-  var bl_latitude = location[0].boundingbox[0]; //bottom left latitude
-  var tr_latitude = location[0].boundingbox[1]; //top right latitude
-  var bl_longitude = location[0].boundingbox[2]; //bottom left longitude
-  var tr_longitude = location[0].boundingbox[3]; //top right longitude
+  const bl_latitude = location[0].boundingbox[0]; //bottom left latitude
+  const tr_latitude = location[0].boundingbox[1]; //top right latitude
+  const bl_longitude = location[0].boundingbox[2]; //bottom left longitude
+  const tr_longitude = location[0].boundingbox[3]; //top right longitude
 
-  var apiUrl =
+  const apiUrl =
     "https://travel-advisor.p.rapidapi.com/restaurants/list-in-boundary?bl_latitude=" +
     bl_latitude +
     "&tr_latitude=" +
@@ -58,8 +63,6 @@ generateGeocode = function (zipcode) {
 
 // POPULATE RESTAURANT RESULTS TO CONTAINER
 displayRestaurants = function (data) {
-  // clear container
-  restaurantContainer.innerHTML = "";
   var restaurantArray = data.data;
 
   // GENERATE CATEGORIES
@@ -79,22 +82,20 @@ displayRestaurants = function (data) {
   // GENERATE CATEGORY BUTTONS
   for (var i = 0; i < categoriesArray.length; i++) {
     var categoryBtn = document.createElement("button");
-    restaurantContainer.appendChild(categoryBtn);
     categoryBtn.setAttribute(
       "class",
       "btn btn-outline-secondary m-1 w-50 restaurant-btn"
     );
     categoryBtn.setAttribute("font-family", "Open Sans");
     categoryBtn.textContent = categoriesArray[i];
-    categoryBtn.addEventListener("click", function (event) {
-      restaurantNames(event);
-    });
+    restaurantCategoryContainer.appendChild(categoryBtn);
+    categoryBtn.addEventListener("click", restaurantNames);
   }
 
   // GENERATE RESTAURANT CARDS
-  restaurantNames = function (event) {
+  function restaurantNames(event) {
     // clear container
-    restaurantContainer.innerHTML = "";
+    restaurantNameContainer.innerHTML = "";
     for (var i = 0; i < Object.keys(restaurantArray).length; i++) {
       if (
         restaurantArray[i].cuisine != undefined &&
@@ -105,7 +106,7 @@ displayRestaurants = function (data) {
           var restaurantName = restaurantArray[i].name;
           var restaurantImg = restaurantArray[i].photo.images.small.url;
           var restaurantCard = document.createElement("div");
-          restaurantCard.setAttribute("class", "card");
+          restaurantCard.setAttribute("class", "card m-3");
           restaurantCard.setAttribute("style", "width: 18rem;");
           restaurantCard.innerHTML = `
         <img class="card-img-top crop" src="${restaurantImg}" alt="Photo of ${restaurantName}">
@@ -117,8 +118,10 @@ displayRestaurants = function (data) {
             "click",
             displayModal(event, restaurantArray[i])
           );
+          //hide buttons
+          restaurantCategoryContainer.setAttribute("class", "hide");
           //generate on page
-          restaurantContainer.appendChild(restaurantCard);
+          restaurantNameContainer.appendChild(restaurantCard);
         }
       }
     }
