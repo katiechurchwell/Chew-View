@@ -2,7 +2,7 @@ const resultsContainer = document.querySelector("#results-container");
 const movieContainer = document.querySelector("#movie-results-container");
 const genreContainer = document.querySelector("#movie-genre-container");
 const titleContainer = document.querySelector("#movie-title-container");
-const apiKey = "2e30e0c5c0a8e70c539fdbad775c4919";
+const movieApiKey = "2e30e0c5c0a8e70c539fdbad775c4919";
 
 function displayMovies(movieData) {
   // MOVIE DETAILS MODAL
@@ -44,7 +44,7 @@ function displayMovies(movieData) {
         movieCard.setAttribute("style", "width: 18rem;");
         movieCard.setAttribute("data-movie-id", i);
         movieCard.innerHTML = `
-        <img class="card-img-top" src="${moviePoster}" alt="Movie Poster of ${title}">
+        <img class="card-img-top crop" src="${moviePoster}" alt="Movie Poster of ${title}">
         <h5 class="card-title">${title}</h5>
         </div>
         `;
@@ -60,7 +60,7 @@ function displayMovies(movieData) {
 
   //DISPLAY MOVIE GENRES
   fetch(
-    `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}&language=en-US`
+    `https://api.themoviedb.org/3/genre/movie/list?api_key=${movieApiKey}&language=en-US`
   ).then(function (response) {
     if (response.ok) {
       response.json().then(function (genreData) {
@@ -97,7 +97,7 @@ function displayMovies(movieData) {
 //FETCH MOVIES (Top 20 most popular)
 var getMovieData = function () {
   fetch(
-    `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
+    `https://api.themoviedb.org/3/movie/popular?api_key=${movieApiKey}&language=en-US&page=1`
   ).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
@@ -115,5 +115,8 @@ clickHandler = function (event) {
   getMovieData();
 };
 
-var submitBtn = document.querySelector("#submit"); //zipcode search button
+var submitBtn = document.querySelector("#submit"); //search button
 submitBtn.addEventListener("click", clickHandler);
+
+var zipHistoryBtn = document.querySelector(".zip-history") //zip history button(s)
+zipHistoryBtn.addEventListener("click", clickHandler);

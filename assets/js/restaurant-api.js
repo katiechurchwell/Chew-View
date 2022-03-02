@@ -1,19 +1,9 @@
-var apiKey = "c449a8d1b1mshcbe3ee310732590p115c8ejsn3b8d1f48601a";
-
-// CONTAINERS
-var resultsContainer = document.querySelector("#results-container"); //all results container
-var restaurantEl = document.querySelector("#restaurant-results-container"); //restaurant results container
-var zipSearchContainerEl = document.querySelector("#zip-search-container"); //zip history container
-
-//REFORMAT LAYOUT ON SUBMIT
-function reformatLayout() {
-  const hero = document.querySelector(".hero");
-  const title = document.querySelector(".title");
-  const zipcodeLabel = document.querySelector("#zipcode-label");
-  hero.style.display = "none";
-  title.style.display = "none";
-  zipcodeLabel.style.display = "none";
-}
+// var resultsContainer = document.querySelector("#results-container");
+var restaurantContainer = document.querySelector(
+  "#restaurant-results-container"
+);
+var zipSearchContainer = document.querySelector("#zip-search-container");
+var restaurantApiKey = "c449a8d1b1mshcbe3ee310732590p115c8ejsn3b8d1f48601a";
 
 // USE COORDINATES OBTAINED FROM GEOCODE API CALL TO MAKE TRAVEL ADVISOR API CALL
 getRestaurants = function (location) {
@@ -37,7 +27,7 @@ getRestaurants = function (location) {
     method: "GET",
     headers: {
       "x-rapidapi-host": "travel-advisor.p.rapidapi.com",
-      "x-rapidapi-key": apiKey,
+      "x-rapidapi-key": restaurantApiKey,
     },
   }).then(function (response) {
     response.json().then(function (data) {
@@ -57,7 +47,7 @@ generateGeocode = function (zipcode) {
     method: "GET",
     headers: {
       "x-rapidapi-host": "forward-reverse-geocoding.p.rapidapi.com",
-      "x-rapidapi-key": apiKey,
+      "x-rapidapi-key": restaurantApiKey,
     },
   }).then(function (response) {
     response.json().then(function (location) {
@@ -66,16 +56,13 @@ generateGeocode = function (zipcode) {
   });
 };
 
-// RESTAURANT RESULTS FUNCTIONS
 // POPULATE RESTAURANT RESULTS TO CONTAINER
 displayRestaurants = function (data) {
-  //reformat layout
-  reformatLayout();
   // clear container
-  restaurantEl.innerHTML = "";
+  restaurantContainer.innerHTML = "";
   var restaurantArray = data.data;
 
-  // GENERATE FOOD CATEGORIES
+  // GENERATE CATEGORIES
   var categoriesArray = [];
   for (var i = 0; i < Object.keys(restaurantArray).length; i++) {
     if (
@@ -89,13 +76,13 @@ displayRestaurants = function (data) {
     }
   }
 
-  // GENERATE FOOD CATEGORY BUTTONS
+  // GENERATE CATEGORY BUTTONS
   for (var i = 0; i < categoriesArray.length; i++) {
     var categoryBtn = document.createElement("button");
-    restaurantEl.appendChild(categoryBtn);
+    restaurantContainer.appendChild(categoryBtn);
     categoryBtn.setAttribute(
       "class",
-      "btn btn-outline-secondary m-1 restaurant-btn"
+      "btn btn-outline-secondary m-1 w-50 restaurant-btn"
     );
     categoryBtn.setAttribute("font-family", "Open Sans");
     categoryBtn.textContent = categoriesArray[i];
@@ -104,79 +91,65 @@ displayRestaurants = function (data) {
     });
   }
 
-  // RESTAURANT MODALS
-  var restaurantArrayCategory = [];
-
-  var displayModal = function (event) {
-    event.preventDefault();
-    for (var i = 0; i < restaurantArrayCategory.length; i++) {
-      if (restaurantArrayCategory[i].name === event.target.textContent) {
-        var modalData = new Object();
-        modalData.name = restaurantArray[i].name;
-        modalData.address = restaurantArray[i].address;
-        modalData.imgSrc = restaurantArray[i].photo.images.small.url;
-        modalData.phone = restaurantArray[i].phone;
-        modalData.website = restaurantArray[i].website;
-      }
-    }
-    // MODAL CONTENTS
-    var name = modalData.name;
-    var address = modalData.address;
-    var imgSrc = modalData.imgSrc;
-    var phone = modalData.phone;
-    var website = modalData.website;
-
-    var markup = `<img src="${imgSrc}" alt="Photo of ${name}">
-    <center>
-    <ul>
-    <li>${address}</li>
-    <li>${phone}</li>
-    <li><a href="${website}>${website}</a></li>
-    </ul>
-    </center>`;
-
-    var modal = document.getElementById("restaurant-modal");
-    var title = modal.getElementsByClassName("modal-title")[0];
-    var body = modal.getElementsByClassName("modal-body")[0];
-    title.textContent = name;
-    body.innerHTML = markup;
-    $("#restaurant-modal").modal("show");
-  };
-
-  // GENERATE RESTAURANT SUGGESTION RESULTS
+  // GENERATE RESTAURANT CARDS
   restaurantNames = function (event) {
-    // CLEAR CONTENTS
-    restaurantEl.innerHTML = "";
+    // clear container
+    restaurantContainer.innerHTML = "";
     for (var i = 0; i < Object.keys(restaurantArray).length; i++) {
       if (
         restaurantArray[i].cuisine != undefined &&
         Object.keys(restaurantArray[i].cuisine).length != 0
       ) {
         if (restaurantArray[i].cuisine[0].name === event.target.textContent) {
-          //
-          var restaurantObject = new Object();
-          restaurantObject.name = restaurantArray[i].name;
-          restaurantObject.address = restaurantArray[i].address;
-          restaurantObject.imgSrc = restaurantArray[i].photo.images.small.url;
-          restaurantObject.phone = restaurantArray[i].phone;
-          restaurantObject.website = restaurantArray[i].website;
-
-          restaurantArrayCategory.push(restaurantObject);
-
-          // RESTAURANT MODAL TRIGGER
-          var restaurant = document.createElement("button");
-          restaurant.innerHTML = restaurantObject.name; //populate results by name
-          restaurant.setAttribute(
-            "class",
-            "btn btn-outline-secondary m-1 w-50 restaurant-btn"
+          // create cards
+          var restaurantName = restaurantArray[i].name;
+          var restaurantImg = restaurantArray[i].photo.images.small.url;
+          var restaurantCard = document.createElement("div");
+          restaurantCard.setAttribute("class", "card");
+          restaurantCard.setAttribute("style", "width: 18rem;");
+          restaurantCard.innerHTML = `
+        <img class="card-img-top crop" src="${restaurantImg}" alt="Photo of ${restaurantName}">
+        <h5 class="card-title">${restaurantName}</h5>
+        </div>
+        `;
+          //modal trigger
+          restaurantCard.addEventListener(
+            "click",
+            displayModal(event, restaurantArray[i])
           );
-          restaurantEl.appendChild(restaurant);
-          restaurant.addEventListener("click", function (event) {
-            displayModal(event);
-          });
+          //generate on page
+          restaurantContainer.appendChild(restaurantCard);
         }
       }
     }
+  };
+
+  // RESTAURANT MODALS
+  var displayModal = function (event, restaurant) {
+    event.preventDefault();
+
+    var restaurantName = restaurant.name;
+    var restaurantAddress = restaurant.address;
+    var distance = restaurant.distance_string;
+    var phone = restaurant.phone;
+    var website = restaurant.website;
+
+    var markup = `
+    <p>
+    <li>${restaurantAddress}</li>
+    <li>${distance} away!</li>
+    <li>${phone}</li>
+    <li><a href="${website}>${website}</a></li>
+    </ul>
+    </p>`;
+
+    var modal = document.getElementById("restaurant-modal");
+    var title = modal.getElementsByClassName("modal-title")[0];
+    var body = modal.getElementsByClassName("modal-body")[0];
+    title.textContent = restaurantName;
+    body.innerHTML = markup;
+
+    $("#restaurant-modal").modal("show");
   };
 };
 
@@ -197,7 +170,7 @@ if (localStorage.getItem(localStorageGetZipCodes)) {
       resultsContainer.classList.remove("hide");
       generateGeocode(event.target.textContent);
     });
-    zipSearchContainerEl.appendChild(zipEl);
+    zipSearchContainer.appendChild(zipEl);
   });
 
   var unhideClearButton = document.getElementById("clear");
@@ -227,7 +200,7 @@ var displayZips = function (zipcode) {
     zipEl.addEventListener("click", function (event) {
       generateGeocode(event.target.textContent);
     });
-    zipSearchContainerEl.appendChild(zipEl);
+    zipSearchContainer.appendChild(zipEl);
     localStorage.setItem(localStorageGetZipCodes, JSON.stringify(zipCodeArray));
   }
 };
@@ -243,9 +216,9 @@ var searchBtn = document.querySelector("#submit"); //zip submit button
 
 searchBtn.addEventListener("click", function (event) {
   if (document.getElementById("error")) {
-    document.getElementById("error").remove()
-  };
-  
+    document.getElementById("error").remove();
+  }
+
   if (isUSAZipCode(zipcode.value)) {
     resultsContainer.classList.remove("hide");
     generateGeocode(zipcode.value);

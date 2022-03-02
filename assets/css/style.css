@@ -10,6 +10,11 @@
   --main-text: "Open Sans", sans-serif;
 }
 
+/* UTILITIES */
+.hide {
+  display: none;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -65,11 +70,6 @@ header a {
   height: 100%;
 }
 
-/* icecream image */
-/* .hero {
-  transition: visibility 0s, opacity 0.5s linear;
-} */
-
 .hero img {
   width: 50vw;
   transform: rotate(30deg);
@@ -78,7 +78,6 @@ header a {
 
 .title {
   position: relative;
-  /* transition: visibility 0s, opacity 0.5s linear; */
 }
 
 .title h1 {
@@ -120,147 +119,9 @@ header a {
   text-align: center;
 }
 
-/* RESTAURANT RESULTS CONTAINER STYLES */
-#restaurant-results-container {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-}
-
-#restaurant-card-container {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  width: 45vw;
-  height: 85.29%;
-  border-radius: var(--border-radius);
-  margin: 4px;
-  justify-content: center;
-}
-
-#restaurant button {
-  border: none;
-  padding: 5px;
-  margin: 5px;
-  height: fit-content;
-  margin: 5px;
-  justify-content: center;
-  font-family: var(--main-text);
-  color: var(--button);
-  line-height: 1.5;
-  background: transparent;
-  font-size: 20px;
-}
-
-#results-container .card {
-  display: flex;
-  margin: 10px;
-}
-
-#restaurant-list {
-  display: flex;
-}
-
-/* RESTAURANT MODALS */
-.modal-body img {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* BUTTONS AND INPUTS */
-.dropdown-content li > a {
-  color: var(--dark);
-  align-items: center;
-}
-
-
-/* BROWSER-BASED STYLES */
-::-webkit-input-placeholder:hover {
-  background-color: transparent;
-  color: transparent;
-  display: none;
-  opacity: 0;
-}
-
-input:focus::-webkit-input-placeholder {
-  background-color: transparent;
-  color: transparent;
-  opacity: 0;
-}
-
-input:focus:-moz-placeholder {
-  background-color: transparent;
-  color: transparent;
-  opacity: 0;
-} /* FF 4-18 */
-
-input:focus::-moz-placeholder {
-  background-color: transparent;
-  color: transparent;
-  opacity: 0;
-} /* FF 19+ */
-
-input:focus:-ms-input-placeholder {
-  background-color: transparent;
-  color: transparent;
-  opacity: 0;
-} /* IE 10+ */
-
-/* MOVIES */
-#movie-card-con {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 auto;
-  justify-content: space-between;
-  align-items: space-around;
-}
-
-.movie-cardy {
-  width: 40%;
-  padding: 0, 10px;
-}
-
-.movie-cardy h3 {
-  font-size: 1.5vw;
-  margin: 0 10px;
-}
-
-.movie-poster-img {
-  width: 100%;
-  height: auto;
-}
-
-#movie-results-container {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  background-color: transparent;
-}
-
-#movie-results-container #search-form {
-  display: flex;
-  flex-flow: column;
-}
-
-#movie {
-  align-items: center;
-  justify-content: center;
-  border-radius: var(--border-radius);
-  margin: 5px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-#movie-search-input {
-  width: fit-content;
-  text-align: center;
-  background: var(--accent);
-  border-radius: var(--border-radius);
-  border: none;
-}
-
-/* HIDE FUNCTION */
-.hide {
-  display: none;
+/* CROP IMAGES */
+.crop {
+  height: 160px;
+  object-fit: cover;
+  overflow: hidden;
 }
