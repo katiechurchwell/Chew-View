@@ -10,11 +10,6 @@
   --main-text: "Open Sans", sans-serif;
 }
 
-/* UTILITIES */
-.hide {
-  display: none;
-}
-
 html {
   scroll-behavior: smooth;
 }
@@ -124,4 +119,9 @@ header a {
   height: 160px;
   object-fit: cover;
   overflow: hidden;
+}
+
+/* UTILITIES */
+.hide {
+  display: none;
 }

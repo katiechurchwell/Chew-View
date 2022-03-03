@@ -11,7 +11,7 @@ const zipSearchContainer = document.querySelector("#zip-search-container");
 const restaurantApiKey = "c449a8d1b1mshcbe3ee310732590p115c8ejsn3b8d1f48601a";
 
 // USE COORDINATES OBTAINED FROM GEOCODE API CALL TO MAKE TRAVEL ADVISOR API CALL
-getRestaurants = function (location) {
+function getRestaurants(location) {
   const bl_latitude = location[0].boundingbox[0]; //bottom left latitude
   const tr_latitude = location[0].boundingbox[1]; //top right latitude
   const bl_longitude = location[0].boundingbox[2]; //bottom left longitude
@@ -39,10 +39,10 @@ getRestaurants = function (location) {
       displayRestaurants(data);
     });
   });
-};
+}
 
 // GEOCODING API CALL FOR ZIP CODE INFORMATION
-generateGeocode = function (zipcode) {
+function generateGeocode(zipcode) {
   var geocodeApiUrl =
     "https://forward-reverse-geocoding.p.rapidapi.com/v1/forward?postalcode=" +
     zipcode +
@@ -59,10 +59,10 @@ generateGeocode = function (zipcode) {
       getRestaurants(location);
     });
   });
-};
+}
 
 // POPULATE RESTAURANT RESULTS TO CONTAINER
-displayRestaurants = function (data) {
+function displayRestaurants(data) {
   var restaurantArray = data.data;
 
   // GENERATE CATEGORIES
@@ -86,7 +86,6 @@ displayRestaurants = function (data) {
       "class",
       "btn btn-outline-secondary m-1 w-50 restaurant-btn"
     );
-    categoryBtn.setAttribute("font-family", "Open Sans");
     categoryBtn.textContent = categoriesArray[i];
     restaurantCategoryContainer.appendChild(categoryBtn);
     categoryBtn.addEventListener("click", restaurantNames);
@@ -94,53 +93,51 @@ displayRestaurants = function (data) {
 
   // GENERATE RESTAURANT CARDS
   function restaurantNames(event) {
-    // clear container
-    restaurantNameContainer.innerHTML = "";
-    for (var i = 0; i < Object.keys(restaurantArray).length; i++) {
+    for (var i = 0; i < restaurantArray.length; i++) {
       if (
-        restaurantArray[i].cuisine != undefined &&
-        Object.keys(restaurantArray[i].cuisine).length != 0
+        restaurantArray[i].cuisine[0].name &&
+        restaurantArray[i].cuisine[0].name == event.target.textContent
       ) {
-        if (restaurantArray[i].cuisine[0].name === event.target.textContent) {
-          // create cards
-          var restaurantName = restaurantArray[i].name;
-          var restaurantImg = restaurantArray[i].photo.images.small.url;
-          var restaurantCard = document.createElement("div");
-          restaurantCard.setAttribute("class", "card m-3");
-          restaurantCard.setAttribute("style", "width: 18rem;");
-          restaurantCard.innerHTML = `
-        <img class="card-img-top crop" src="${restaurantImg}" alt="Photo of ${restaurantName}">
-        <h5 class="card-title">${restaurantName}</h5>
-        </div>
-        `;
-          //modal trigger
-          restaurantCard.addEventListener(
-            "click",
-            displayModal(event, restaurantArray[i])
-          );
-          //hide buttons
-          restaurantCategoryContainer.setAttribute("class", "hide");
-          //generate on page
-          restaurantNameContainer.appendChild(restaurantCard);
-        }
+        // create cards
+        var restaurantName = restaurantArray[i].name;
+        var restaurantImg = restaurantArray[i].photo.images.small.url;
+        var restaurantCard = document.createElement("div");
+        restaurantCard.setAttribute("data-restaurant-index", i);
+        restaurantCard.setAttribute(
+          "class",
+          "card m-3 restaurant-category-btn"
+        );
+        restaurantCard.setAttribute("style", "width: 18rem;");
+        restaurantCard.innerHTML = `
+              <img class="card-img-top crop" src="${restaurantImg}" alt="Photo of ${restaurantName}">
+              <h5 class="card-title">${restaurantName}</h5>
+              </div>
+              `;
+        //hide buttons
+        restaurantCategoryContainer.setAttribute("class", "hide");
+        //generate on page
+        restaurantNameContainer.appendChild(restaurantCard);
+        //modal trigger
+        restaurantCard.addEventListener("click", displayModal);
       }
     }
-  };
+  }
 
   // RESTAURANT MODALS
-  var displayModal = function (event, restaurant) {
-    event.preventDefault();
+  function displayModal(event) {
+    const index =
+      event.target.getAttribute("data-restaurant-index") ||
+      event.target.parentNode.getAttribute("data-restaurant-index");
+    const restaurant = restaurantArray[index];
 
     var restaurantName = restaurant.name;
     var restaurantAddress = restaurant.address;
-    var distance = restaurant.distance_string;
     var phone = restaurant.phone;
     var website = restaurant.website;
 
     var markup = `
     <p>
     <li>${restaurantAddress}</li>
-    <li>${distance} away!</li>
     <li>${phone}</li>
     <li><a href="${website}>${website}</a></li>
     </ul>
@@ -153,8 +150,8 @@ displayRestaurants = function (data) {
     body.innerHTML = markup;
 
     $("#restaurant-modal").modal("show");
-  };
-};
+  }
+}
 
 // ZIP CODE HISTORY
 var localStorageGetZipCodes = "zip-code-list";
