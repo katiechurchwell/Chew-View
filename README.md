@@ -15,7 +15,7 @@ Simplify date night and speed up decision making. Chew View helps pick a movie &
 
 ## Deployment
 
-katiechurchwell.github.io/chew-view/
+[katiechurchwell.github.io/chew-view/](https://katiechurchwell.github.io/Chew-View/)
 
 ## Screenshot
 
