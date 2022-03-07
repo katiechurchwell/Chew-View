@@ -68,7 +68,6 @@ header a {
 .hero img {
   width: 50vw;
   transform: rotate(30deg);
-  position: absolute;
 }
 
 .title {
