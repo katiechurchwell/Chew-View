@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import Movie from "./components/Movie";
 import Restaurant from "./components/Restaurant";
 import ZipcodeForm from "./components/ZipcodeForm";
+import React from 'react'
 
 function App() {
   return (
