@@ -1,8 +1,9 @@
+import Container from "react-bootstrap/Container";
 import icecream from "../assets/img/ice-cream.svg"
 
 function Hero() {
   return (
-    <>
+    <Container>
       <svg id="blob" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
         <path
           fill="#FFFFFF"
@@ -17,7 +18,7 @@ function Hero() {
       />
       <h1>Take the guesswork out of date night</h1>
       <p>Generate a local restaurant and movie to stream tonight!</p>
-    </>
+    </Container>
   );
 }
 

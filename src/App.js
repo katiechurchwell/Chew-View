@@ -1,4 +1,5 @@
 import "./App.css";
+import { Container, Row, Col } from "react-bootstrap";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Movie from "./components/Movie";
@@ -10,9 +11,17 @@ function App() {
     <>
       <Header />
       <Hero />
-      <Movie />
-      <Restaurant />
       <ZipcodeForm />
+      <Container>
+        <Row>
+          <Col>
+            <Movie />
+          </Col>
+          <Col>
+            <Restaurant />
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }
