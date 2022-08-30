@@ -5,19 +5,20 @@ import Hero from "./components/Hero";
 import Movie from "./components/Movie";
 import Restaurant from "./components/Restaurant";
 import ZipcodeForm from "./components/ZipcodeForm";
-import React from 'react'
+import { React, useState } from "react";
 
 function App() {
+  const [zipcode, setZipcode] = useState();
+
   return (
     <>
       <Header />
-      <Hero />
-      <ZipcodeForm />
       <Container>
         <Row>
-          <Col>
-            <Movie />
-          </Col>
+          <Hero />
+        </Row>
+        <Row>
+          <Col>{/* <Movie /> */}</Col>
           <Col>
             <Restaurant />
           </Col>

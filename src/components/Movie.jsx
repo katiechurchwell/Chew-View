@@ -1,6 +1,6 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import { useEffect, useState } from "react";
-import { getMovieGenreNames } from "../utilities/helpers";
+import { getMovieGenreNames } from "../utilities/getMovieGenreNames";
 
 function Movie() {
   const [loading, setLoading] = useState();
