@@ -1,4 +1,4 @@
-const movieGenres = [
+const movieGenreById = [
   { name: "Action", id: 28 },
   { name: "Adventure", id: 12 },
   { name: "Animation", id: 16 },
@@ -19,3 +19,14 @@ const movieGenres = [
   { name: "War", id: 10752 },
   { name: "Western", id: 37 },
 ];
+
+export function getMovieGenreNames(movieData) {
+  //create new array of genre ids from movieData (unique and destructured)
+  const genreIds = [
+    ...new Set(movieData.results.map((movie) => movie.genre_ids).flat()),
+  ];
+  //match to genre names
+  const matches = movieGenreById.filter((movie) => genreIds.includes(movie.id));
+  //return names only
+  return matches.map((movie) => movie.name);
+}

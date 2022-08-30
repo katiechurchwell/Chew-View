@@ -12,7 +12,7 @@ function Header() {
         </Col>
         <Col>
           <a href="https://github.com/katiechurchwell/Chew-View">
-            <i class="devicon-github-original" />
+            <i className="devicon-github-original" />
             Check us out on GitHub!
           </a>
         </Col>
