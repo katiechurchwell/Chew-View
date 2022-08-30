@@ -1,6 +1,5 @@
 function ZipcodeForm() {
-    return <>"ZipcodeForm"</>;
-  }
-  
-  export default ZipcodeForm;
-  
+  return <>"ZipcodeForm"</>;
+}
+
+export default ZipcodeForm;
