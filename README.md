@@ -1,43 +1,70 @@
-# Chew View
+# Getting Started with Create React App
 
-[![project-languages-used](https://img.shields.io/github/languages/count/katiechurchwell/Chew-View?color=important)](https://github.com/katiechurchwell/Chew-View)
-[![project-top-language](https://img.shields.io/github/languages/top/katiechurchwell/Chew-View?color=blueviolet)](https://github.com/katiechurchwell/Chew-View)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Summary
+## Available Scripts
 
-![JavaScript](https://img.shields.io/badge/JavaScript_ES6-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E)
-![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=flat&logo=css3&logoColor=white)
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white)
-![jQuery](https://img.shields.io/badge/jquery-%230769AD.svg?style=flat&logo=jquery&logoColor=white)
-![Bootstrap](https://img.shields.io/badge/bootstrap-%23563D7C.svg?style=f&logo=bootstrap&logoColor=white)
+In the project directory, you can run:
 
-Simplify date night and speed up decision making. Chew View helps pick a movie & food pairing and discover new options. Simply enter your zipcode and decide on movie genre and restaurant cuisine to generate some options.
+### `npm start`
 
-## Deployment
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-[katiechurchwell.github.io/chew-view/](https://katiechurchwell.github.io/Chew-View/)
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-## Screenshot
+### `npm test`
 
-![Screenshot of Chew View](./chew-view-screenshot.png)
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-## Contributions
-* Chris Lawn - https://github.com/ChristopherLawn
-* Daniel Harned - https://github.com/DrDano
-* Katie Churchwell - https://github.com/katiechurchwell
-* Kenneth Washington - https://github.com/iiMKenny
-* Zachary Clark - https://github.com/zaclark369
+### `npm run build`
 
-## Credits
-Landing page graphic credit to [Open Doodles](https://www.opendoodles.com/).
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Questions
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-This redesign is currently maintained by Katie Churchwell:
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-- [katiechurchwell](https://www.github.com/katiechurchwell)
-- [churchwellcatherine@gmail.com](mailto:churchwellcatherine@gmail.com)
+### `npm run eject`
 
----
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-![](https://img.shields.io/badge/license-MIT-blue)
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
